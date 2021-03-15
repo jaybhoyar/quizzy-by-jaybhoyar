@@ -1,12 +1,10 @@
 import React from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+
 const App = () => {
 	return (
-		<Router>
-			<Switch>
-				<Route exact path="/" render={() => <div>Home</div>} />
-			</Switch>
-		</Router>
+		<center>
+			<h1>Welcome to the Quizzy App</h1>
+		</center>
 	);
 };
 
