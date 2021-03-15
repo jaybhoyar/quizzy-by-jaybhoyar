@@ -39,3 +39,21 @@
 yarn-debug.log*
 .yarn-integrity
 
+test/fixtures 
+test/reports 
+
+#-----------------------# 
+# OSX Ignores # 
+#-----------------------# 
+.DS_Store 
+.AppleDouble 
+.LSOverride 
+.localized 
+
+#-----------------------# 
+# Vscode 
+#-----------------------# 
+.vscode/*
+.vscode-test
+!.vscode/tasks.json #included for running custom tasks
+!.vscode/launch.json #included for common debugger options
