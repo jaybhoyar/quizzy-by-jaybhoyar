@@ -65,4 +65,8 @@ class UserTest < ActiveSupport::TestCase
     end 
   end
 
+  test "user_should_have_a_valid_role" do
+    assert @user.valid? if @user.role == "standard" || "administrator"
+  end
+
 end
