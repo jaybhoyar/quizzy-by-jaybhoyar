@@ -1,9 +1,6 @@
 class User < ApplicationRecord
-  before_save { self.email = email.downcase }
-  enum role: [:standard, :administrator]
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i.freeze
-
-  has_secure_password
+  enum role: [:standard, :administrator]
 
   validates :email, presence: true,
                     uniqueness: true,
@@ -12,5 +9,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 50 }
   validates :password, presence: true, confirmation: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true, on: :create
+
+  before_save { self.email = email.downcase }
+  has_secure_password
 
 end
