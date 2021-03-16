@@ -2,9 +2,10 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(first_name: "Sam", last_name: "Smith", email: "sam@example.com")
+    @user = User.new(first_name: "Sam", last_name: "Smith", email: "sam@example.com",
+                      password: "123456", password_confirmation: "123456")
   end
-  
+
   test "user_should_be_valid" do 
     assert @user.valid?
   end
@@ -67,6 +68,20 @@ class UserTest < ActiveSupport::TestCase
 
   test "user_should_have_a_valid_role" do
     assert @user.valid? if @user.role == "standard" || "administrator"
+  end
+
+  test "password_should_not_be_blank" do
+    @user.password = @user.password_confirmation = " " * 6
+    assert_not @user.valid?
+  end
+
+  test "password_should_have_a_minimum_length" do
+    @user.password = @user.password_confirmation = "a" * 5
+    assert_not @user.valid?
+  end
+
+  test "password_and_password_confirmation_should_match" do
+    assert @user.valid? if @user.password == @user.password_confirmation
   end
 
 end
