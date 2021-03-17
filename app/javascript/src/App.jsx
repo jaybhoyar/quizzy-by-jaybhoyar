@@ -1,10 +1,13 @@
 import React from "react";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+
+import NavBar from "components/NavBar";
 
 const App = () => {
 	return (
-		<center>
-			<h1 className="font-sans">Welcome to the Quizzy App</h1>
-		</center>
+		<Router>
+			<NavBar />
+		</Router>
 	);
 };
 
