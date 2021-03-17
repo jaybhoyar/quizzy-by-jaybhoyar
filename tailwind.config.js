@@ -7,7 +7,8 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				"quizzy-bg": "#f5f5f5",
+				"quizzy-teal":"#088e99",
+				"quizzy-bg": "#F3F2EE",
 				"quizzy-green": "#3fcc73",
 				"quizzy-blue": "#3a8ff2",
 				"quizzy-navy-blue": "#003152",

@@ -1,9 +1,10 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
 
   def create
     @user = User.find_by(email: session_params[:email])
     if @user && @user.authenticate(session_params[:password])
-      log_in!(@user.id)
+      login!
       render status: :ok, json: { 
         notice: "Welcome back, #{@user.first_name}",
        }
@@ -16,11 +17,10 @@ class SessionsController < ApplicationController
 
   def destroy
     logout!
-    render json: { status: ok }
+    render json: { status: :ok }
   end
 
   private
-
     def session_params
       params.require(:login).permit(:email, :password)
     end

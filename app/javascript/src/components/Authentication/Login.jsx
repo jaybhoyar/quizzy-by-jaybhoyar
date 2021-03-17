@@ -14,6 +14,7 @@ const Login = () => {
 				login: { email, password },
 			});
 			console.log(response.data);
+			window.location.href = "/";
 		} catch (error) {
 			console.log(error);
 		}
