@@ -10,7 +10,7 @@ module.exports = {
 				"quizzy-bg": "#f5f5f5",
 				"quizzy-green": "#3fcc73",
 				"quizzy-blue": "#3a8ff2",
-				"quizzy-navy-blue": "#222852",
+				"quizzy-navy-blue": "#003152",
 				"quizzy-light-orange": "#f29266",
 				"quizzy-error-red": "#db0015",
 				"quizzy-error-bg": "#f8d7da",
