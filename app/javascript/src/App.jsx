@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-const App = () => {
+import NavBar from "components/NavBar";
+import Login from "components/Authentication/Login";
+import { registerIntercepts } from "apis/axios";
+const App = ({ currentUser }) => {
+	useEffect(() => {
+		registerIntercepts();
+	}, []);
+
 	return (
-		<center>
-			<h1 className="font-sans">Welcome to the Quizzy App</h1>
-		</center>
+		<Router>
+			<ToastContainer />
+			<NavBar currentUser={currentUser} />
+			<div className="bg-quizzy-bg min-h-screen">
+				<Switch>
+					<Route exact path="/login" component={Login} />
+					<Route exact path="/" render={() => <div>Home</div>} />
+				</Switch>
+			</div>
+		</Router>
 	);
 };
 
