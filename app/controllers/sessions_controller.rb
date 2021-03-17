@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: session_params[:email])
     if @user && @user.authenticate(session_params[:password])
-      session[:user_id] = @user.id
+      log_in!(@user.id)
       render status: :ok, json: { 
         notice: "Welcome back, #{@user.first_name}",
        }
@@ -12,6 +12,11 @@ class SessionsController < ApplicationController
         notice: 'Incorrect credentials, try again.'
       }
     end
+  end
+
+  def destroy
+    logout!
+    render json: { status: ok }
   end
 
   private
