@@ -5,8 +5,10 @@ import { ToastContainer } from "react-toastify";
 import NavBar from "components/NavBar";
 import Login from "components/Authentication/Login";
 import Dashboard from "./components/Dashboard";
+import CreateQuiz from "./components/Quiz/CreateQuiz";
 
 import { registerIntercepts } from "apis/axios";
+
 const App = ({ currentUser }) => {
 	useEffect(() => {
 		registerIntercepts();
@@ -20,6 +22,7 @@ const App = ({ currentUser }) => {
 				<Switch>
 					<Route exact path="/" component={Dashboard} />
 					<Route exact path="/login" component={Login} />
+					<Route exact path="/create" component={CreateQuiz} />
 				</Switch>
 			</div>
 		</Router>
