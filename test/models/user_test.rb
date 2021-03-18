@@ -77,6 +77,10 @@ class UserTest < ActiveSupport::TestCase
     assert @user.valid? if @user.role == "standard" || "administrator"
   end
 
+  def test_user_should_not_have_an_invalid_role
+    assert_raises(ArgumentError) { @user.role = "admin" }
+  end
+
   def test_password_should_not_be_blank
     @user.password = @user.password_confirmation = " " * 6
     assert_not @user.valid?
