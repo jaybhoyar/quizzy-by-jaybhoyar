@@ -4,6 +4,8 @@ import { ToastContainer } from "react-toastify";
 
 import NavBar from "components/NavBar";
 import Login from "components/Authentication/Login";
+import Dashboard from "./components/Dashboard";
+
 import { registerIntercepts } from "apis/axios";
 const App = ({ currentUser }) => {
 	useEffect(() => {
@@ -16,8 +18,8 @@ const App = ({ currentUser }) => {
 			<NavBar currentUser={currentUser} />
 			<div className="bg-quizzy-bg min-h-screen">
 				<Switch>
+					<Route exact path="/" component={Dashboard} />
 					<Route exact path="/login" component={Login} />
-					<Route exact path="/" render={() => <div>Home</div>} />
 				</Switch>
 			</div>
 		</Router>
