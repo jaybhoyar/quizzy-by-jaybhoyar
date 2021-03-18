@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import authApi from "apis/auth";
 
 const NavBar = ({ currentUser }) => {
+	console.log(currentUser);
 
 	const handleLogout = async (event) => {
 		event.preventDefault();
