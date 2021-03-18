@@ -3,8 +3,9 @@ class User < ApplicationRecord
   enum role: [:standard, :administrator]
 
   validates :email, presence: true,
-                    uniqueness: true,
-                    format: { with: VALID_EMAIL_REGEX }
+                     format: { with: VALID_EMAIL_REGEX },
+                     uniqueness: { case_sensitive: false }
+                     
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
   validates :password, presence: true, confirmation: true, length: { minimum: 6 }
