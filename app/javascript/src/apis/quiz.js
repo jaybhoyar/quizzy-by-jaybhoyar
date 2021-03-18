@@ -2,8 +2,8 @@ import axios from "axios";
 
 const create = (payload) => axios.post("/quizzes", payload);
 
-const quizApi = {
+const quizzesApi = {
 	create,
 };
 
-export default quizApi;
+export default quizzesApi;
