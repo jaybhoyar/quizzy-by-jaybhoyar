@@ -4,15 +4,13 @@ import { Link } from "react-router-dom";
 import authApi from "apis/auth";
 
 const NavBar = ({ currentUser }) => {
-	console.log(currentUser);
-
 	const handleLogout = async (event) => {
 		event.preventDefault();
 		try {
 			await authApi.logout();
 			window.location.href = "/login";
 		} catch (error) {
-			console.log(error);
+			//
 		}
 	};
 	return (

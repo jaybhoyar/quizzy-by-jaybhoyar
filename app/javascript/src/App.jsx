@@ -15,7 +15,7 @@ const App = ({ currentUser }) => {
 	}, []);
 
 	return (
-		<Router>
+		<Router histo>
 			<ToastContainer />
 			<NavBar currentUser={currentUser} />
 			<div className="bg-quizzy-bg min-h-screen">
