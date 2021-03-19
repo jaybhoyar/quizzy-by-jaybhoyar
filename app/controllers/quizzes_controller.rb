@@ -26,6 +26,15 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def destroy
+    if @quiz.blank?
+      render status: :not_found, json: { notice: "Quiz not found" }
+    elsif @quiz.destroy
+      render status: :ok, json: { notice: "Quiz deleted successfully!" }
+    else
+      render status: :unprocessable_entity, json: { errors: @quiz.errors.full_messages.to_sentence }
+    end
+  end
 
 
   private
