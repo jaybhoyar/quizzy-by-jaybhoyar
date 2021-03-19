@@ -5,9 +5,8 @@ import Button from "components/Button";
 
 import quizzesApi from "apis/quiz";
 
-const CreateQuiz = ({ history }) => {
+const CreateQuiz = () => {
 	const [name, setName] = useState("");
-	const [error, setError] = useState("");
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -15,9 +14,9 @@ const CreateQuiz = ({ history }) => {
 			await quizzesApi.create({
 				quiz: { name },
 			});
-			history.push("/");
+			window.location.href = "/";
 		} catch (error) {
-			setError(error);
+			//
 		}
 	};
 

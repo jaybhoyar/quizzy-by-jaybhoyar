@@ -1,9 +1,8 @@
 class QuizzesController < ApplicationController
-  include SessionsHelper
-
+  
   def create
     quiz = Quiz.new(quiz_params)
-    quiz.user_id = current_user.id
+    quiz.user_id = @current_user.id
     if quiz.save
       render status: :ok, json: {notice: "Quiz created successfully!"}
     else
@@ -15,7 +14,6 @@ class QuizzesController < ApplicationController
     def quiz_params
       params.require(:quiz).permit(:name)
     end
-
 
 
 end
