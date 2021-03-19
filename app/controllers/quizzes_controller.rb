@@ -1,5 +1,10 @@
 class QuizzesController < ApplicationController
   
+  def index
+    quizzes = Quiz.all.order("created_at DESC")
+    render status: :ok, json: {quizzes: quizzes}
+  end
+
   def create
     quiz = Quiz.new(quiz_params)
     quiz.user_id = @current_user.id
