@@ -22,7 +22,7 @@ const NavBar = ({ currentUser }) => {
 				</div>
 				<div className="flex items-center justify-between mr-8">
 					{currentUser ? (
-						<h2 className="text-lg pt-1 pr-3 leading-5 text-quizzy-teal font-medium	border-bb-border border-r">
+						<h2 className="text-lg pt-1 pr-3 leading-5 text-quizzy-teal font-medium	border-gray-600 border-r">
 							{`${currentUser.first_name} ${currentUser.last_name}`}
 						</h2>
 					) : (

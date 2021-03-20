@@ -60,7 +60,19 @@ const ListQuizzes = () => {
 			),
 		},
 	];
-	return <Table data={quizzes} columns={columns} />;
+	return (
+		<>
+			{quizzes.length ? (
+				<Table data={quizzes} columns={columns} />
+			) : (
+				<div className="flex justify-center mt-24">
+					<p className="py-12 font-bold text-3xl text-gray-400 tracking-wide">
+						You have not created any quiz.
+					</p>
+				</div>
+			)}
+		</>
+	);
 };
 
 export default ListQuizzes;

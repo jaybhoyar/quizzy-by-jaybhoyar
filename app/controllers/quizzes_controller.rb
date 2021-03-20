@@ -12,7 +12,7 @@ class QuizzesController < ApplicationController
     if quiz.save
       render status: :ok, json: { notice: "Quiz created successfully!" }
     else
-      render status: :unprocessable_entity, json: { errors: quiz.errors.full_messages.to_sentence }
+      render status: :unprocessable_entity, json: { error: quiz.errors.full_messages.to_sentence }
     end
   end
 
@@ -31,7 +31,7 @@ class QuizzesController < ApplicationController
     elsif @quiz.update(quiz_params)
       render status: :ok, json: { notice: "Quiz updated successfully!" }
     else
-      render status: :unprocessable_entity, json: { errors: @quiz.errors.full_messages.to_sentence }
+      render status: :unprocessable_entity, json: { error: @quiz.errors.full_messages.to_sentence }
     end
   end
 
@@ -41,7 +41,7 @@ class QuizzesController < ApplicationController
     elsif @quiz.destroy
       render status: :ok, json: { notice: "Quiz deleted successfully!" }
     else
-      render status: :unprocessable_entity, json: { errors: @quiz.errors.full_messages.to_sentence }
+      render status: :unprocessable_entity, json: { error: @quiz.errors.full_messages.to_sentence }
     end
   end
 
