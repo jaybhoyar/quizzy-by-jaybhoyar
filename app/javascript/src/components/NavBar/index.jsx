@@ -8,9 +8,10 @@ const NavBar = ({ currentUser }) => {
 		event.preventDefault();
 		try {
 			await authApi.logout();
-			window.location.href = "/login";
 		} catch (error) {
 			//
+		} finally {
+			window.location.href = "/login";
 		}
 	};
 	return (
@@ -19,10 +20,10 @@ const NavBar = ({ currentUser }) => {
 				<div className="flex items-center ml-6">
 					<h1 className="text-white font-bold text-2xl">Quizzy</h1>
 				</div>
-				<div className="flex items-center justify-between w-1/12 mr-8">
+				<div className="flex items-center justify-between mr-8">
 					{currentUser ? (
 						<h2 className="text-lg pt-1 pr-3 leading-5 text-quizzy-teal font-medium	border-bb-border border-r">
-							{currentUser.first_name}
+							{`${currentUser.first_name} ${currentUser.last_name}`}
 						</h2>
 					) : (
 						""
@@ -34,7 +35,7 @@ const NavBar = ({ currentUser }) => {
 							transition duration-150 ease-in-out font-medium	text-lg leading-5
 							text-white cursor-pointer"
 						>
-							LogOut
+							Logout
 						</a>
 					) : (
 						<Link

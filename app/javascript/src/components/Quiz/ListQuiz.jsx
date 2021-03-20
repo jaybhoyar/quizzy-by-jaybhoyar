@@ -11,10 +11,19 @@ const ListQuizzes = () => {
 	const fetchQuizzes = async () => {
 		try {
 			const response = await quizzesApi.list();
-			console.log(response.data.quizzes);
 			setQuizzes(response.data.quizzes);
 		} catch (error) {
-			console.log(error);
+			//
+		}
+	};
+
+	const destroyTask = async (id) => {
+		try {
+			await quizzesApi.destroy(id);
+		} catch (error) {
+			//
+		} finally {
+			window.location.href = "/";
 		}
 	};
 
@@ -41,7 +50,7 @@ const ListQuizzes = () => {
 						Edit
 					</Link>
 					<button
-						onClick={console.log(row.original.id)}
+						onClick={() => destroyTask(row.original.id)}
 						className="px-6 py-3
             text-base font-medium leading-4 text-white transition duration-150
             ease-in-out bg-red-500 border border-transparent rounded-md outline-none"

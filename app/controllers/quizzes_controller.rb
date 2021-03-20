@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :load_quiz, only: %i[update]
+  before_action :load_quiz, only: %i[update destroy]
   
   def index
     quizzes = Quiz.all.order("created_at DESC")
