@@ -25,6 +25,7 @@
 	"parser": "babel-eslint",
 	"plugins": ["react"],
 	"rules": {
+		"react/display-name": "off",
 		"no-unused-vars": 0,
 		"no-undef": 0,
 		"semi": ["error", "always"],
