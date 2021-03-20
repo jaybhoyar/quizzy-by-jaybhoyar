@@ -6,6 +6,7 @@ import NavBar from "components/NavBar";
 import Login from "components/Authentication/Login";
 import Dashboard from "./components/Dashboard";
 import CreateQuiz from "./components/Quiz/CreateQuiz";
+import EditQuiz from "./components/Quiz/EditQuiz";
 
 import { registerIntercepts } from "apis/axios";
 
@@ -22,7 +23,8 @@ const App = ({ currentUser }) => {
 				<Switch>
 					<Route exact path="/" component={Dashboard} />
 					<Route exact path="/login" component={Login} />
-					<Route exact path="/create" component={CreateQuiz} />
+					<Route exact path="/quizzes/create" component={CreateQuiz} />
+					<Route exact path="/quizzes/:id/edit" component={EditQuiz} />
 				</Switch>
 			</div>
 		</Router>
