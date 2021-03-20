@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ListQuizzes from "components/Quiz/ListQuiz";
 
 const Dashboard = () => {
 	return (
@@ -21,6 +22,7 @@ const Dashboard = () => {
 					</Link>
 				</div>
 			</div>
+			<ListQuizzes />
 		</div>
 	);
 };
