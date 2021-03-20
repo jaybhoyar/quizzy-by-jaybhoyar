@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-import Input from "components/Input";
-import Button from "components/Button";
+import QuizForm from "components/Quiz/Form/QuizForm";
 
 import quizzesApi from "apis/quiz";
 
@@ -23,15 +22,11 @@ const CreateQuiz = () => {
 	return (
 		<div className="w-2/6 mx-auto p-5">
 			<h1 className="text-4xl font-bold mx-auto my-8">Add New Quiz</h1>
-			<form className="mt-8 mx-auto" onSubmit={handleSubmit}>
-				<Input
-					label="Quiz Name"
-					type="text"
-					placeholder="Science"
-					onChange={(e) => setName(e.target.value)}
-				/>
-				<Button type="submit" buttonText="Submit" />
-			</form>
+			<QuizForm
+				name={name}
+				setName={setName}
+				handleSubmit={handleSubmit}
+			/>
 		</div>
 	);
 };

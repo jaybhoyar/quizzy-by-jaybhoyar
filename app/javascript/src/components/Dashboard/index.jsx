@@ -13,7 +13,7 @@ const Dashboard = () => {
 				</div>
 				<div className="flex items-center justify-between">
 					<Link
-						to="/create"
+						to="/quizzes/create"
 						className="flex justify-center px-6 py-3
          text-xl font-medium leading-5 text-white transition duration-150
          ease-in-out bg-quizzy-teal border border-transparent rounded-md"

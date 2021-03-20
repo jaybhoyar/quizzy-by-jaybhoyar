@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -42,7 +41,7 @@ const ListQuizzes = () => {
 			Cell: ({ row }) => (
 				<div className="text-right pr-6">
 					<Link
-						to={`/quizzes/edit/${row.original.id}`}
+						to={`/quizzes/${row.original.id}/edit`}
 						className="px-6 py-3 mr-6
             text-base font-medium leading-4 transition duration-150
             ease-in-out bg-yellow-500 border border-transparent rounded-md outline-none"

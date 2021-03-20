@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :load_quiz, only: %i[update destroy]
+  before_action :load_quiz, only: %i[show update destroy]
   
   def index
     quizzes = Quiz.all.order("created_at DESC")
@@ -15,6 +15,15 @@ class QuizzesController < ApplicationController
       render status: :unprocessable_entity, json: { errors: quiz.errors.full_messages.to_sentence }
     end
   end
+
+  def show
+    if @quiz
+      render status: :ok, json: { quiz: @quiz }
+    else
+      render status: :not_found, json: { notice: "Quiz not found" }
+    end
+  end
+
 
   def update
     if @quiz.blank?
