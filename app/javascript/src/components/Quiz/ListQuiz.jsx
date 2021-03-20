@@ -1,40 +1,40 @@
 import React, { useMemo, useState, useEffect } from "react";
 
 import Table from "components/Quiz/Table";
+import quizzesApi from "apis/quiz";
 
 const ListQuizzes = () => {
+	const [quizzes, setQuizzes] = useState([]);
+
+	const fetchQuizzes = async () => {
+		try {
+			const response = await quizzesApi.list();
+			console.log(response.data.quizzes);
+			setQuizzes(response.data.quizzes);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		fetchQuizzes();
+	}, []);
+
 	const columns = React.useMemo(
 		() => [
 			{
-				Header: "Column 1",
-				accessor: "col1",
+				Header: "Quiz Name",
+				accessor: "name",
 			},
 			{
 				Header: "Column 2",
-				accessor: "col2",
+				accessor: "id",
 			},
 		],
 		[]
 	);
 
-	const data = React.useMemo(
-		() => [
-			{
-				col1: "Hello",
-				col2: "World",
-			},
-			{
-				col1: "react-table",
-				col2: "rocks",
-			},
-			{
-				col1: "whatever",
-				col2: "you want",
-			},
-		],
-		[]
-	);
-	return <Table data={data} columns={columns} />;
+	return <Table data={quizzes} columns={columns} />;
 };
 
 export default ListQuizzes;
