@@ -4,11 +4,12 @@ import { ToastContainer } from "react-toastify";
 
 import NavBar from "components/NavBar";
 import Login from "components/Authentication/Login";
-import Dashboard from "./components/Dashboard";
-import CreateQuiz from "./components/Quiz/CreateQuiz";
-import ShowQuiz from "./components/Quiz/ShowQuiz";
+import Dashboard from "components/Dashboard";
+import CreateQuiz from "components/Quiz/CreateQuiz";
+import ShowQuiz from "components/Quiz/ShowQuiz";
+import EditQuiz from "components/Quiz/EditQuiz";
+import CreateQuestion from "components/Question/CreateQuestion";
 
-import EditQuiz from "./components/Quiz/EditQuiz";
 
 import { registerIntercepts } from "apis/axios";
 
@@ -39,6 +40,11 @@ const App = ({ currentUser }) => {
 						exact
 						path="/quizzes/:id/edit"
 						component={EditQuiz}
+					/>
+					<Route
+						exact
+						path="/quizzes/:id/questions/create"
+						component={CreateQuestion}
 					/>
 				</Switch>
 			</div>
