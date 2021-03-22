@@ -25,9 +25,21 @@ const App = ({ currentUser }) => {
 				<Switch>
 					<Route exact path="/" component={Dashboard} />
 					<Route exact path="/login" component={Login} />
-					<Route exact path="/quizzes/create" component={CreateQuiz} />
-					<Route exact path="/quizzes/:id/show" component={ShowQuiz} />
-					<Route exact path="/quizzes/:id/edit" component={EditQuiz} />
+					<Route
+						exact
+						path="/quizzes/create"
+						component={CreateQuiz}
+					/>
+					<Route
+						exact
+						path="/quizzes/:id/show"
+						component={ShowQuiz}
+					/>
+					<Route
+						exact
+						path="/quizzes/:id/edit"
+						component={EditQuiz}
+					/>
 				</Switch>
 			</div>
 		</Router>
