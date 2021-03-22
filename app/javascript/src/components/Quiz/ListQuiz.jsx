@@ -12,10 +12,6 @@ const ListQuizzes = () => {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const handleClose = () => setModalIsOpen(false);
 
-	function openModal() {
-		setModalIsOpen(true);
-	}
-
 	function handleEvents(quiz) {
 		setModalIsOpen(true);
 		setQuiz(quiz);
