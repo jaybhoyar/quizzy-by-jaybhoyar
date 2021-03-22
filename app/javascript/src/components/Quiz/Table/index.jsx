@@ -1,5 +1,6 @@
 import React from "react";
 import { useTable } from "react-table";
+import { Link } from "react-router-dom";
 
 const Table = ({ data, columns }) => {
 	const {
