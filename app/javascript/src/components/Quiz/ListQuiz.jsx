@@ -34,6 +34,14 @@ const ListQuizzes = () => {
 		{
 			Header: "Quiz Name",
 			accessor: "name",
+			Cell: ({ row }) => (
+				<Link
+					to={`/quizzes/${row.original.id}/show`}
+					className="cursor-pointer"
+				>
+					{row.original.name}
+				</Link>
+			),
 		},
 		{
 			Header: "",
