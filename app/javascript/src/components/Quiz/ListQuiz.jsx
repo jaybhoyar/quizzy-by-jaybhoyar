@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Table from "components/Quiz/Table";
 import AlertModal from "components/Common/AlertModal";
 import quizzesApi from "apis/quiz";
-import { handleEvent } from "react_ujs";
 
 const ListQuizzes = () => {
 	const [quizzes, setQuizzes] = useState([]);
