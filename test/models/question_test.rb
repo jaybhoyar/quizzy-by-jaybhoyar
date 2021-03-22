@@ -18,7 +18,7 @@ class QuestionTest < ActiveSupport::TestCase
     assert_equal ["Title can't be blank", "Quiz can't be blank"], @question.errors.full_messages
   end
 
-  def test_question_name_should_not_exceed_250_characters
+  def test_question_title_should_not_exceed_250_characters
     @question.title = "a" * 251
     assert_not @question.valid?
     assert_equal ["Title is too long (maximum is 250 characters)", "Quiz can't be blank"], @question.errors.full_messages
