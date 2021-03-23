@@ -15,6 +15,12 @@ const QuestionForm = ({
 		setOptions(newOptions);
 	}
 
+	function handleRemoveInputs(index) {
+		const newOptions = [...options];
+		newOptions.splice(index, 1);
+		setOptions(newOptions);
+	}
+
 	function handleOnChange(e, index) {
 		let newArr = [...options];
 		newArr[index].value = e.target.value;
@@ -31,7 +37,7 @@ const QuestionForm = ({
 				onChange={(e) => setTitle(e.target.value)}
 			/>
 			{options.map((option, index) => (
-				<div key={index}>
+				<div key={index} className="flex">
 					<Input
 						label={`Option ${index + 1}`}
 						type="text"
@@ -39,6 +45,17 @@ const QuestionForm = ({
 						value={option.value}
 						onChange={(e) => handleOnChange(e, index)}
 					/>
+					{index >= 2 ? (
+						<button
+							type="button"
+							className="mt-3 text-2xl text-blue"
+							onClick={() => handleRemoveInputs(index)}
+						>
+							-
+						</button>
+					) : (
+						""
+					)}
 				</div>
 			))}
 			{options.length < 4 ? (
