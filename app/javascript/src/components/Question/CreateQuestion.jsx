@@ -28,7 +28,10 @@ const CreateQuestion = () => {
 				payload: {
 					question: {
 						title,
-						options_attributes: options,
+						options_attributes: options.map((option, index) => ({
+							value: option.value,
+							is_correct: false,
+						})),
 					},
 				},
 			});

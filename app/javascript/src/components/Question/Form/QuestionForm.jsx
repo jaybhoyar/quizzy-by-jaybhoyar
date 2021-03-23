@@ -9,6 +9,12 @@ const QuestionForm = ({
 	setOptions,
 	handleSubmit,
 }) => {
+	function handleAddMoreInputs() {
+		const newOptions = [...options];
+		newOptions.push({ value: "" });
+		setOptions(newOptions);
+	}
+
 	function handleOnChange(e, index) {
 		let newArr = [...options];
 		newArr[index].value = e.target.value;
@@ -24,19 +30,29 @@ const QuestionForm = ({
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
 			/>
-
-			{options.map((option, index) => {
-				return (
+			{options.map((option, index) => (
+				<div key={index}>
 					<Input
-						key={index}
-						label={`Option ${index}`}
+						label={`Option ${index + 1}`}
 						type="text"
 						placeholder=""
 						value={option.value}
 						onChange={(e) => handleOnChange(e, index)}
 					/>
-				);
-			})}
+				</div>
+			))}
+			{options.length < 4 ? (
+				<button
+					type="button"
+					className="mt-3 text-blue underline"
+					onClick={() => handleAddMoreInputs()}
+				>
+					+ Add option
+				</button>
+			) : (
+				""
+			)}
+
 			<Button type="submit" buttonText="Submit" />
 		</form>
 	);
