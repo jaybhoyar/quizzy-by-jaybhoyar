@@ -52,8 +52,8 @@ const CreateQuestion = () => {
 	}, []);
 
 	return (
-		<div className="w-2/6 mx-auto p-5">
-			<h1 className="text-xl font-bold my-8">{quizDetails.name}</h1>
+		<div className="w-1/2 mx-auto p-5">
+			<h1 className="text-2xl font-bold mt-5">{quizDetails.name }</h1>
 			<QuestionForm
 				title={title}
 				setTitle={setTitle}
