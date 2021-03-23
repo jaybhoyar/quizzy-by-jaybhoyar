@@ -7,11 +7,13 @@ const QuestionForm = ({
 	setTitle,
 	options,
 	setOptions,
+	correctOption,
+	setCorrectOption,
 	handleSubmit,
 }) => {
 	function handleAddMoreInputs() {
 		const newOptions = [...options];
-		newOptions.push({ value: "" });
+		newOptions.push({ value: null });
 		setOptions(newOptions);
 	}
 
@@ -48,7 +50,7 @@ const QuestionForm = ({
 					{index >= 2 ? (
 						<button
 							type="button"
-							className="mt-3 text-2xl text-blue"
+							className=" inline mt-3 text-2xl"
 							onClick={() => handleRemoveInputs(index)}
 						>
 							-
@@ -69,6 +71,19 @@ const QuestionForm = ({
 			) : (
 				""
 			)}
+			<select
+				className="block p-3 mt-3"
+				value={correctOption}
+				required={true}
+				onChange={(e) => setCorrectOption(e.target.value)}
+			>
+				<option value="">Select correct answer</option>
+				{options.map((option, index) => (
+					<option key={index} value={index}>
+						{option.value}
+					</option>
+				))}
+			</select>
 
 			<Button type="submit" buttonText="Submit" />
 		</form>

@@ -9,7 +9,8 @@ const CreateQuestion = () => {
 	const { id } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
 	const [title, setTitle] = useState("");
-	const [options, setOptions] = useState([{ value: "" }, { value: "" }]);
+	const [options, setOptions] = useState([{ value: null }, { value: null }]);
+	const [correctOption, setCorrectOption] = useState(null);
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -52,6 +53,8 @@ const CreateQuestion = () => {
 				setTitle={setTitle}
 				options={options}
 				setOptions={setOptions}
+				correctOption={correctOption}
+				setCorrectOption={setCorrectOption}
 				handleSubmit={handleSubmit}
 			/>
 		</div>
