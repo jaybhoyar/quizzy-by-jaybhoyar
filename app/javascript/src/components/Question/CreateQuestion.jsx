@@ -28,9 +28,7 @@ const CreateQuestion = () => {
 				payload: {
 					question: {
 						title,
-						options_attributes: [
-							{ value: option1, is_correct: true },
-						],
+						options_attributes: options,
 					},
 				},
 			});
