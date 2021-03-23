@@ -4,5 +4,4 @@ class Option < ApplicationRecord
   validates :value, presence: true, length: { maximum: 150 }
   validates :is_correct, presence: true
   validates_inclusion_of :is_correct, :in => [true, false]
-  validates :question_id, presence: true
 end

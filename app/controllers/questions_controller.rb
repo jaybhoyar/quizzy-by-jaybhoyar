@@ -1,8 +1,8 @@
 class QuestionsController < ApplicationController
+  before_action :load_quiz, only: %i[create]
 
   def create
-    question = Question.new(question_params)
-    question.quiz_id = @quiz.id
+    question = @quiz.questions.new(question_params)
     if question.save
       render status: :ok, json: { notice: "Question created successfully!" }
     else
@@ -13,6 +13,10 @@ class QuestionsController < ApplicationController
   private
     def question_params
       params.require(:question).permit(:title, options_attributes: [:value, :is_correct])
+    end
+
+    def load_quiz
+      @quiz = Quiz.find(params[:quiz_id])
     end
 
 end
