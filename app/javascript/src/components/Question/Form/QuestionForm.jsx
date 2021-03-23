@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "components/Input";
 import Button from "components/Button";
 
@@ -13,7 +13,7 @@ const QuestionForm = ({
 }) => {
 	function handleAddMoreInputs() {
 		const newOptions = [...options];
-		newOptions.push({ value: null });
+		newOptions.push({ value: "" });
 		setOptions(newOptions);
 	}
 
@@ -77,9 +77,9 @@ const QuestionForm = ({
 				required={true}
 				onChange={(e) => setCorrectOption(e.target.value)}
 			>
-				<option value="">Select correct answer</option>
+				<option value="">Select correct option</option>
 				{options.map((option, index) => (
-					<option key={index} value={index}>
+					<option key={index} value={option.value}>
 						{option.value}
 					</option>
 				))}

@@ -11,7 +11,6 @@ class QuestionTest < ActiveSupport::TestCase
     assert @question.invalid?
   end
 
-
   def test_question_title_should_not_be_blank
     @question.title = ""
     assert_not @question.valid?

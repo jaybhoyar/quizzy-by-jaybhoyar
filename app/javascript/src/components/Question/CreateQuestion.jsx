@@ -9,8 +9,8 @@ const CreateQuestion = () => {
 	const { id } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
 	const [title, setTitle] = useState("");
-	const [options, setOptions] = useState([{ value: null }, { value: null }]);
-	const [correctOption, setCorrectOption] = useState(null);
+	const [options, setOptions] = useState([{ value: "" }, { value: "" }]);
+	const [correctOption, setCorrectOption] = useState("");
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -23,16 +23,14 @@ const CreateQuestion = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		const options_attributes = getOptionAttributes();
 		try {
 			await questionApi.create({
 				quiz_id: id,
 				payload: {
 					question: {
 						title,
-						options_attributes: options.map((option, index) => ({
-							value: option.value,
-							is_correct: false,
-						})),
+						options_attributes,
 					},
 				},
 			});
@@ -40,6 +38,14 @@ const CreateQuestion = () => {
 			//
 		}
 	};
+
+	function getOptionAttributes() {
+		const options_attributes = options.map((option, index) => ({
+			value: option.value,
+			is_correct: option.value === correctOption,
+		}));
+		return options_attributes;
+	}
 
 	useEffect(() => {
 		fetchQuizDetails();
