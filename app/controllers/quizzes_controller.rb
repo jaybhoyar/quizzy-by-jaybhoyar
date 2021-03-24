@@ -52,7 +52,7 @@ class QuizzesController < ApplicationController
     end
 
     def load_quiz
-      @quiz = Quiz.find(params[:id])
+      @quiz = Quiz.find_by(id: params[:id])
     end
 
 
