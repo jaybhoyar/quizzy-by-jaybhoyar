@@ -7,11 +7,13 @@ import quizzesApi from "apis/quiz";
 const ShowQuiz = () => {
 	const { id } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
+	const [questions, setQuestions] = useState("");
 
 	const fetchQuizDetails = async () => {
 		try {
 			const response = await quizzesApi.show(id);
 			setQuizDetails(response.data.quiz);
+			setQuestions(response.data.quiz.questions);
 		} catch (error) {
 			//
 		}
@@ -38,6 +40,12 @@ const ShowQuiz = () => {
 						Add questions
 					</Link>
 				</div>
+			</div>
+			<div className="mt-4">
+				{questions &&
+					questions.map((question, index) => {
+						return <p key={index}>{question.title}</p>;
+					})}
 			</div>
 		</div>
 	);

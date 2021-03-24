@@ -17,7 +17,8 @@ class QuizzesController < ApplicationController
 
   def show
     if @quiz
-      render status: :ok, json: { quiz: @quiz }
+      questions = @quiz.questions
+      render status: :ok, json: { quiz: @quiz, questions: questions }
     else
       render status: :not_found, json: { notice: "Quiz not found" }
     end
