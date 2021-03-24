@@ -7,13 +7,13 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				"quizzy-teal":"#088e99",
+				"quizzy-teal": "#088e99",
 				"quizzy-bg": "#F3F2EE",
 				"quizzy-green": "#3fcc73",
 				"quizzy-blue": "#3a8ff2",
 				"quizzy-navy-blue": "#003152",
 				"quizzy-light-orange": "#f29266",
-				"quizzy-error-red": "#db0015",
+				"quizzy-error-red": "#fc1f0f",
 				"quizzy-error-bg": "#f8d7da",
 				"bb-purple": "#5469D4",
 				"bb-env": "#F1F5F9",
