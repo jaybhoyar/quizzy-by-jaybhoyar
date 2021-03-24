@@ -2,7 +2,7 @@ class QuizzesController < ApplicationController
   before_action :load_quiz, only: %i[show update destroy]
   
   def index
-    quizzes = @current_user.quizzes.order("created_at DESC")
+    quizzes = @current_user.quizzes.all
     render status: :ok, json: {quizzes: quizzes}
   end
 
