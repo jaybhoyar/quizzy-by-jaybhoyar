@@ -34,6 +34,7 @@ const CreateQuestion = () => {
 					},
 				},
 			});
+			window.location.href = `/quizzes/${quiz_id}/show`;
 		} catch (error) {
 			//
 		}
