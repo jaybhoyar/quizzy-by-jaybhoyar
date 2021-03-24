@@ -43,8 +43,44 @@ const ShowQuiz = () => {
 			</div>
 			<div className="mt-4">
 				{questions &&
-					questions.map((question, index) => {
-						return <p key={index}>{question.title}</p>;
+					questions.map((obj, index) => {
+						return (
+							<div key={index} className="mt-4">
+								<div
+									keys={index}
+									className="p-3 flex justify-start items-center"
+								>
+									<span className="pr-6">{`Question ${
+										index + 1
+									}`}</span>
+									<h2 className="text-xl">
+										{obj.question.title}
+									</h2>
+								</div>
+								{obj.options.map((option, i) => {
+									return (
+										<div
+											key={i}
+											className="p-3 flex justify-start items-center"
+										>
+											<span className="pr-6">{`Option ${
+												i + 1
+											}`}</span>
+											<h2 className="text-xl">
+												{option.value}
+											</h2>
+											{option.is_correct ? (
+												<span className="pl-5 text-quizzy-green">
+													Correct Answer
+												</span>
+											) : (
+												""
+											)}
+										</div>
+									);
+								})}
+							</div>
+						);
 					})}
 			</div>
 		</div>
