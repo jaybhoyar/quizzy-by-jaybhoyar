@@ -56,6 +56,14 @@ const ShowQuiz = () => {
 									<h2 className="text-xl">
 										{obj.question.title}
 									</h2>
+									<div className="pl-6">
+										<button className="p-2 mr-3 bg-yellow-500">
+											Edit
+										</button>
+										<button className="p-2 mr-3 bg-quizzy-error-red">
+											Delete
+										</button>
+									</div>
 								</div>
 								{obj.options.map((option, i) => {
 									return (
