@@ -48,7 +48,7 @@ const App = ({ currentUser }) => {
 					/>
 					<Route
 						exact
-						path="/quizzes/:quiz_id/questions/:id"
+						path="/quizzes/:quiz_id/questions/:id/edit"
 						component={UpdateQuestion}
 					/>
 				</Switch>

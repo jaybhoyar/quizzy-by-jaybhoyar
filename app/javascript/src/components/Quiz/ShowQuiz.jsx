@@ -57,9 +57,12 @@ const ShowQuiz = () => {
 										{obj.question.title}
 									</h2>
 									<div className="pl-6">
-										<button className="p-2 mr-3 bg-yellow-500">
+										<Link
+											to={`/quizzes/${id}/questions/${obj.question.id}/edit`}
+											className="p-2 mr-3 bg-yellow-500"
+										>
 											Edit
-										</button>
+										</Link>
 										<button className="p-2 mr-3 bg-quizzy-error-red">
 											Delete
 										</button>
