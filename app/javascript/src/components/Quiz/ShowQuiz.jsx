@@ -13,7 +13,7 @@ const ShowQuiz = () => {
 		try {
 			const response = await quizzesApi.show(id);
 			setQuizDetails(response.data.quiz);
-			setQuestions(response.data.quiz.questions);
+			setQuestions(response.data.questions);
 		} catch (error) {
 			//
 		}

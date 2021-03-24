@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
   before_action :load_quiz, only: %i[show update destroy]
+  before_action :load_questions_with_options, only: %i[show]
   
   def index
     quizzes = @current_user.quizzes.all
@@ -17,8 +18,7 @@ class QuizzesController < ApplicationController
 
   def show
     if @quiz
-      questions = @quiz.questions
-      render status: :ok, json: { quiz: @quiz, questions: questions }
+      render status: :ok, json: { quiz: @quiz, questions: @quiz_questions }
     else
       render status: :not_found, json: { notice: "Quiz not found" }
     end
@@ -53,6 +53,11 @@ class QuizzesController < ApplicationController
 
     def load_quiz
       @quiz = Quiz.find_by(id: params[:id])
+    end
+
+    def load_questions_with_options
+      questions = @quiz.questions.includes(:options)
+      @quiz_questions = questions.map { |question| { question: question, options: question.options } }
     end
 
 
