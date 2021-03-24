@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
     end
 
     def load_quiz
-      @quiz = Quiz.find(params[:quiz_id])
+      @quiz = Quiz.find_by(id: params[:quiz_id])
     end
 
 end
