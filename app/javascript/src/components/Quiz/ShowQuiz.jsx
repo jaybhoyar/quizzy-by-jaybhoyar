@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import quizzesApi from "apis/quiz";
+import questionApi from "apis/question";
 
 const ShowQuiz = () => {
 	const { id } = useParams();
@@ -14,6 +15,15 @@ const ShowQuiz = () => {
 			const response = await quizzesApi.show(id);
 			setQuizDetails(response.data.quiz);
 			setQuestions(response.data.questions);
+		} catch (error) {
+			//
+		}
+	};
+
+	const destroyQuestion = async (question_id) => {
+		try {
+			await questionApi.destroy(id, question_id);
+			window.location.href = `/quizzes/${id}/show`;
 		} catch (error) {
 			//
 		}
@@ -63,7 +73,12 @@ const ShowQuiz = () => {
 										>
 											Edit
 										</Link>
-										<button className="p-2 mr-3 bg-quizzy-error-red">
+										<button
+											onClick={() =>
+												destroyQuestion(obj.question.id)
+											}
+											className="p-2 mr-3 bg-quizzy-error-red"
+										>
 											Delete
 										</button>
 									</div>

@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :load_quiz, only: %i[create update show]
-  before_action :load_question, only: %i[update show]
+  before_action :load_question, only: %i[update show destroy]
 
   def create
     question = @quiz.questions.new(question_params)
@@ -22,8 +22,18 @@ class QuestionsController < ApplicationController
   def update
     if @question.blank?
       render status: :not_found, json: { notice: "Question not found" }
-    elsif  @question.update(question_params)
+    elsif  @quiz.questions.update(question_params)
       render status: :ok, json: { notice: "Question updated successfully!" }
+    else
+      render status: :unprocessable_entity, json: { error: @question.errors.full_messages.to_sentence }
+    end
+  end
+
+  def destroy
+    if @question.blank?
+      render status: :not_found, json: { notice: "Question not found" }
+    elsif @question.destroy
+      render status: :ok, json: { notice: "Question deleted successfully!" }
     else
       render status: :unprocessable_entity, json: { error: @question.errors.full_messages.to_sentence }
     end

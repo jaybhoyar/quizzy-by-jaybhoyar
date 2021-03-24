@@ -34,7 +34,6 @@ const UpdateQuestion = () => {
 		event.preventDefault();
 		let options_attributes = getOptionAttributes();
 		try {
-			console.log(options_attributes);
 			await questionApi.update({
 				quiz_id,
 				id,
@@ -45,7 +44,6 @@ const UpdateQuestion = () => {
 					},
 				},
 			});
-			console.log(options_attributes);
 			// window.location.href = `/quizzes/${quiz_id}/show`;
 		} catch (error) {
 			//
