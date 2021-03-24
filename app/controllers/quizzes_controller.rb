@@ -7,8 +7,7 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    quiz = Quiz.new(quiz_params)
-    quiz.user_id = @current_user.id
+    quiz = @current_user.quizzes.new(quiz_params)
     if quiz.save
       render status: :ok, json: { notice: "Quiz created successfully!" }
     else
