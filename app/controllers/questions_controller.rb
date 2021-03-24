@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :load_quiz, only: %i[create]
+  before_action :load_question, only: %i[update]
 
   def create
     question = @quiz.questions.new(question_params)
@@ -10,6 +11,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def update
+    if @question.blank?
+      render status: :not_found, json: { notice: "Question not found" }
+    elsif @question.update(question_params)
+      render status: :ok, json: { notice: "Question updated successfully!" }
+    else
+      render status: :unprocessable_entity, json: { error: @question.errors.full_messages.to_sentence }
+    end
+  end
+
   private
     def question_params
       params.require(:question).permit(:title, options_attributes: [:value, :is_correct])
@@ -17,6 +28,10 @@ class QuestionsController < ApplicationController
 
     def load_quiz
       @quiz = Quiz.find_by(id: params[:quiz_id])
+    end
+
+    def load_question
+      @question = Question.find_by(id: params[:id])
     end
 
 end

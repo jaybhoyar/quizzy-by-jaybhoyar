@@ -9,7 +9,7 @@ import CreateQuiz from "components/Quiz/CreateQuiz";
 import ShowQuiz from "components/Quiz/ShowQuiz";
 import EditQuiz from "components/Quiz/EditQuiz";
 import CreateQuestion from "components/Question/CreateQuestion";
-
+import UpdateQuestion from "components/Question/UpdateQuestion";
 
 import { registerIntercepts } from "apis/axios";
 
@@ -19,7 +19,7 @@ const App = ({ currentUser }) => {
 	}, []);
 
 	return (
-		<Router histo>
+		<Router>
 			<ToastContainer />
 			<NavBar currentUser={currentUser} />
 			<div className="bg-quizzy-bg min-h-screen">
@@ -43,8 +43,13 @@ const App = ({ currentUser }) => {
 					/>
 					<Route
 						exact
-						path="/quizzes/:id/questions/create"
+						path="/quizzes/:quiz_id/questions/create"
 						component={CreateQuestion}
+					/>
+					<Route
+						exact
+						path="/quizzes/:quiz_id/questions/:id"
+						component={UpdateQuestion}
 					/>
 				</Switch>
 			</div>
