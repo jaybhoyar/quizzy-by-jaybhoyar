@@ -6,33 +6,55 @@ import questionApi from "apis/question";
 
 const UpdateQuestion = () => {
 	const { quiz_id, id } = useParams();
-	const [questionDetails, setQuestionDetails] = useState("");
 	const [title, setTitle] = useState("");
 	const [options, setOptions] = useState([]);
 	const [correctOption, setCorrectOption] = useState("");
+	const [removedOptions, setRemovedOptions] = useState([]);
 
 	const fetchQuestionDetails = async () => {
 		try {
 			const response = await questionApi.show(quiz_id, id);
-			setQuestionDetails(response.data.question);
-			setTitle(response.data.question.title);
-			setOptions(response.data.options);
+			setFormData(response);
 		} catch (error) {
 			//
 		}
 	};
 
+	function setFormData(response) {
+		setTitle(response.data.question.title);
+		setOptions(response.data.options);
+		setRemovedOptions(response.data.options);
+		const correctAnswer = response.data.options.filter(
+			(option) => option.is_correct
+		);
+		setCorrectOption(correctAnswer[0].value);
+	}
+
+	function getRemovedOptions() {
+		const filteredOptions = removedOptions.filter(
+			(option) => !options.includes(option)
+		);
+		return filteredOptions.map((option) => {
+			return {
+				...option,
+				_destroy: true,
+			};
+		});
+	}
+
 	function getOptionAttributes() {
-		const options_attributes = options.map((option, index) => ({
-			value: option.value,
+		const options_attributes = options.map((option) => ({
+			...option,
 			is_correct: option.value === correctOption,
 		}));
-		return options_attributes;
+
+		return options_attributes.concat(getRemovedOptions());
 	}
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		let options_attributes = getOptionAttributes();
+		getRemovedOptions();
 		try {
 			await questionApi.update({
 				quiz_id,
@@ -44,7 +66,7 @@ const UpdateQuestion = () => {
 					},
 				},
 			});
-			// window.location.href = `/quizzes/${quiz_id}/show`;
+			window.location.href = `/quizzes/${quiz_id}/show`;
 		} catch (error) {
 			//
 		}
@@ -56,7 +78,7 @@ const UpdateQuestion = () => {
 
 	return (
 		<div className="w-1/2 mx-auto p-5">
-			<h1 className="text-2xl font-bold mt-5">{questionDetails.title}</h1>
+			<h1 className="text-2xl font-bold mt-5">Update Question</h1>
 			<QuestionForm
 				title={title}
 				setTitle={setTitle}

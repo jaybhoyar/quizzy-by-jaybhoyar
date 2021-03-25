@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   def update
     if @question.blank?
       render status: :not_found, json: { notice: "Question not found" }
-    elsif  @quiz.questions.update(question_params)
+    elsif  @question.update(question_params)
       render status: :ok, json: { notice: "Question updated successfully!" }
     else
       render status: :unprocessable_entity, json: { error: @question.errors.full_messages.to_sentence }
@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
 
   private
     def question_params
-      params.require(:question).permit(:title, options_attributes: [:value, :is_correct])
+      params.require(:question).permit(:title, options_attributes: [:id, :value, :is_correct, :_destroy])
     end
 
     def load_quiz
