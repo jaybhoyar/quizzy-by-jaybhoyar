@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :quizzes, except: %i[new, edit] do
     resources :questions, except: %i[new, edit]
   end
+  resources :public, only: %i[create show]
   
   root "home#index"
   get '*path', to: 'home#index', via: :all

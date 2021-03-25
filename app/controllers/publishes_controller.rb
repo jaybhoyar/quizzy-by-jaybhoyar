@@ -1,3 +1,0 @@
-class PublishesController < ApplicationController
-
-end
