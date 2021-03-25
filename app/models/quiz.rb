@@ -6,4 +6,9 @@ class Quiz < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 250 }
   validates :user_id, presence: true
+
+  private
+    def generate_slug
+      self.slug = self.name.parameterize
+    end
 end
