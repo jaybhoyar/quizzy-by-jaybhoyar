@@ -8,7 +8,7 @@ import questionApi from "apis/question";
 const ShowQuiz = () => {
 	const { id } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
-	const [questions, setQuestions] = useState("");
+	const [questions, setQuestions] = useState([]);
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -44,11 +44,21 @@ const ShowQuiz = () => {
 				<div className="flex items-center justify-between">
 					<Link
 						to={`/quizzes/${quizDetails.id}/questions/create`}
-						className="flex justify-center px-6 py-3 text-xl font-medium 
+						className="flex justify-center px-6 py-3 text-xl font-medium mr-4 
             leading-5 text-white bg-quizzy-teal border border-transparent rounded-md"
 					>
 						Add questions
 					</Link>
+					{questions ? (
+						<button
+							className="flex justify-center px-6 py-3 text-xl font-medium 
+            leading-5 text-white bg-quizzy-teal border border-transparent rounded-md"
+						>
+							Publish
+						</button>
+					) : (
+						""
+					)}
 				</div>
 			</div>
 			<div className="mt-4">
