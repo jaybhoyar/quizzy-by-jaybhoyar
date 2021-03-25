@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resource :sessions, only: %i[create destroy]
   resources :quizzes, except: %i[new, edit] do
-    resources :questions, only: %i[create]
+    resources :questions, except: %i[new, edit]
   end
   
   root "home#index"

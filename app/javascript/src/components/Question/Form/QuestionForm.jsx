@@ -22,6 +22,7 @@ const QuestionForm = ({
 	function handleRemoveInputs(index) {
 		const newOptions = [...options];
 		newOptions.splice(index, 1);
+
 		setOptions(newOptions);
 	}
 

@@ -6,7 +6,7 @@ import questionApi from "apis/question";
 import quizzesApi from "apis/quiz";
 
 const CreateQuestion = () => {
-	const { id } = useParams();
+	const { quiz_id } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
 	const [title, setTitle] = useState("");
 	const [options, setOptions] = useState([{ value: "" }, { value: "" }]);
@@ -26,7 +26,7 @@ const CreateQuestion = () => {
 		const options_attributes = getOptionAttributes();
 		try {
 			await questionApi.create({
-				quiz_id: id,
+				quiz_id,
 				payload: {
 					question: {
 						title,
@@ -34,6 +34,7 @@ const CreateQuestion = () => {
 					},
 				},
 			});
+			window.location.href = `/quizzes/${quiz_id}/show`;
 		} catch (error) {
 			//
 		}
@@ -53,7 +54,7 @@ const CreateQuestion = () => {
 
 	return (
 		<div className="w-1/2 mx-auto p-5">
-			<h1 className="text-2xl font-bold mt-5">{quizDetails.name }</h1>
+			<h1 className="text-2xl font-bold mt-5">{quizDetails.name}</h1>
 			<QuestionForm
 				title={title}
 				setTitle={setTitle}
