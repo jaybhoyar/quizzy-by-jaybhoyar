@@ -3,7 +3,7 @@ require "test_helper"
 class QuizTest < ActiveSupport::TestCase
   def setup
     user = User.create(first_name: "Sam", last_name: "Smith", email: "sam@example.com", password: "welcome", password_confirmation: "welcome")
-    @quiz = user.quizzes.new(name:"Animals")
+    @quiz = user.quizzes.new(name:"Animal Kingdom", slug: "animal-kingdom")
   end
 
   def test_quiz_should_be_valid
@@ -21,6 +21,18 @@ class QuizTest < ActiveSupport::TestCase
     @quiz.name = "a" * 251
     assert_not @quiz.valid?
     assert_equal ["Name is too long (maximum is 250 characters)"], @quiz.errors.full_messages
+  end
+  
+  def test_quiz_slug_should_not_be_blank
+    @quiz.slug = nil
+    assert_not @quiz.valid?
+    assert_equal ["Slug can't be blank"], @quiz.errors.full_messages
+  end
+
+  def test_quiz_slug_should_be_unique
+    duplicate_quiz = @quiz.dup 
+    @quiz.save
+    assert_not duplicate_quiz.valid?
   end
 
   def test_quiz_user_should_not_be_blank

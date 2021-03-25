@@ -5,6 +5,7 @@ class Quiz < ApplicationRecord
   has_many :questions, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 250 }
+  validates :slug, presence: true, uniqueness: true
   validates :user_id, presence: true
 
   private
