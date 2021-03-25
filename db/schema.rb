@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_22_144712) do
+ActiveRecord::Schema.define(version: 2021_03_25_181634) do
 
   create_table "options", force: :cascade do |t|
     t.string "value", null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_144712) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug", default: "", null: false
     t.index ["user_id"], name: "index_quizzes_on_user_id"
   end
 
