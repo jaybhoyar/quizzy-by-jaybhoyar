@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 
 import quizzesApi from "apis/quiz";
 import questionApi from "apis/question";
+import publishApi from "apis/publish";
 
 const ShowQuiz = () => {
 	const { id } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
 	const [questions, setQuestions] = useState([]);
+	const [fullUrl, setFullUrl] = useState("");
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -24,6 +26,15 @@ const ShowQuiz = () => {
 		try {
 			await questionApi.destroy(id, question_id);
 			window.location.href = `/quizzes/${id}/show`;
+		} catch (error) {
+			//
+		}
+	};
+
+	const publishQuiz = async () => {
+		try {
+			const res = await publishApi.create({ quiz_id: id });
+			setFullUrl(res.data.full_url);
 		} catch (error) {
 			//
 		}
@@ -49,8 +60,9 @@ const ShowQuiz = () => {
 					>
 						Add questions
 					</Link>
-					{questions ? (
+					{questions.length && !fullUrl ? (
 						<button
+							onClick={publishQuiz}
 							className="flex justify-center px-6 py-3 text-xl font-medium 
             leading-5 text-white bg-quizzy-teal border border-transparent rounded-md"
 						>
@@ -61,6 +73,13 @@ const ShowQuiz = () => {
 					)}
 				</div>
 			</div>
+			{fullUrl ? (
+				<div className="py-3 px-4 text-base text-blue-500 font-bold">
+					{window.location.href + fullUrl}
+				</div>
+			) : (
+				""
+			)}
 			<div className="mt-4">
 				{questions &&
 					questions.map((obj, index) => {

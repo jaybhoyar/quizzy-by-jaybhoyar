@@ -28,13 +28,13 @@ const App = ({ currentUser }) => {
 					<Route exact path="/login" component={Login} />
 					<Route
 						exact
-						path="/quizzes/create"
-						component={CreateQuiz}
+						path="/quizzes/:id/show"
+						component={ShowQuiz}
 					/>
 					<Route
 						exact
-						path="/quizzes/:id/show"
-						component={ShowQuiz}
+						path="/quizzes/create"
+						component={CreateQuiz}
 					/>
 					<Route
 						exact
