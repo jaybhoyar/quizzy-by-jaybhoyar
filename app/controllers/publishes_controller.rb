@@ -5,7 +5,7 @@ class PublishesController < ApplicationController
     if @quiz
       @quiz.generate_slug
       @quiz.save
-      render status: :ok, json: { full_url: "public/#{@quiz.slug}" }
+      render status: :ok, json: { notice: "Quiz published successfully" }
     else
       render status: :unprocessable_entity, json: { error: "Something went wrong" }
     end

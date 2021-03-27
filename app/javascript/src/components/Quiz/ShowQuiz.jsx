@@ -10,7 +10,6 @@ const ShowQuiz = () => {
 	const { id } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
 	const [questions, setQuestions] = useState([]);
-	const [fullUrl, setFullUrl] = useState("");
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -33,8 +32,8 @@ const ShowQuiz = () => {
 
 	const publishQuiz = async () => {
 		try {
-			const res = await publishApi.create({ quiz_id: id });
-			setFullUrl(res.data.full_url);
+			await publishApi.create({ quiz_id: id });
+			fetchQuizDetails();
 		} catch (error) {
 			//
 		}
@@ -60,7 +59,7 @@ const ShowQuiz = () => {
 					>
 						Add questions
 					</Link>
-					{questions.length && !fullUrl ? (
+					{!quizDetails.slug && questions.length ? (
 						<button
 							onClick={publishQuiz}
 							className="flex justify-center px-6 py-3 text-xl font-medium 
@@ -73,9 +72,12 @@ const ShowQuiz = () => {
 					)}
 				</div>
 			</div>
-			{fullUrl ? (
-				<div className="py-3 px-4 text-base text-blue-500 font-bold">
-					{window.location.href + fullUrl}
+			{quizDetails.slug ? (
+				<div className="py-3 px-4 text-xl flex items-center">
+					Published, your public link is -
+					<p className="pl-3 text-quizzy-blue font-bold tracking-wide cursor-pointer">
+						{window.location.origin + "/public/" + quizDetails.slug}
+					</p>
 				</div>
 			) : (
 				""
