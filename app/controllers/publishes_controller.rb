@@ -3,6 +3,8 @@ class PublishesController < ApplicationController
 
   def create
     if @quiz
+      @quiz.generate_slug
+      @quiz.save
       render status: :ok, json: { full_url: "public/#{@quiz.slug}" }
     else
       render status: :unprocessable_entity, json: { error: "Something went wrong" }

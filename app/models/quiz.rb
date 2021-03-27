@@ -1,12 +1,10 @@
 class Quiz < ApplicationRecord
   default_scope { order("created_at DESC") }
-  before_validation :generate_slug
 
   belongs_to :user
   has_many :questions, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 250 }
-  validates :slug, uniqueness: true
   validates :user_id, presence: true
 
   def generate_slug
