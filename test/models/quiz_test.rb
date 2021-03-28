@@ -3,13 +3,12 @@ require "test_helper"
 class QuizTest < ActiveSupport::TestCase
   def setup
     user = User.create(first_name: "Sam", last_name: "Smith", email: "sam@example.com", password: "welcome", password_confirmation: "welcome")
-    @quiz = user.quizzes.new(name:"Animals")
+    @quiz = user.quizzes.new(name:"Animal Kingdom")
   end
 
   def test_quiz_should_be_valid
     assert @quiz.valid?
   end
-
 
   def test_quiz_name_should_not_be_blank
     @quiz.name = ""

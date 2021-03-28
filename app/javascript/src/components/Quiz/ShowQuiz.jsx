@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import quizzesApi from "apis/quiz";
 import questionApi from "apis/question";
+import publishApi from "apis/publish";
 
 const ShowQuiz = () => {
 	const { id } = useParams();
@@ -23,7 +24,16 @@ const ShowQuiz = () => {
 	const destroyQuestion = async (question_id) => {
 		try {
 			await questionApi.destroy(id, question_id);
-			window.location.href = `/quizzes/${id}/show`;
+			window.location.href = `/admin/quizzes/${id}/show`;
+		} catch (error) {
+			//
+		}
+	};
+
+	const publishQuiz = async () => {
+		try {
+			await publishApi.create({ quiz_id: id });
+			fetchQuizDetails();
 		} catch (error) {
 			//
 		}
@@ -43,14 +53,15 @@ const ShowQuiz = () => {
 				</div>
 				<div className="flex items-center justify-between">
 					<Link
-						to={`/quizzes/${quizDetails.id}/questions/create`}
+						to={`/admin/quizzes/${quizDetails.id}/questions/create`}
 						className="flex justify-center px-6 py-3 text-xl font-medium mr-4 
             leading-5 text-white bg-quizzy-teal border border-transparent rounded-md"
 					>
 						Add questions
 					</Link>
-					{questions ? (
+					{!quizDetails.slug && questions.length ? (
 						<button
+							onClick={publishQuiz}
 							className="flex justify-center px-6 py-3 text-xl font-medium 
             leading-5 text-white bg-quizzy-teal border border-transparent rounded-md"
 						>
@@ -61,6 +72,16 @@ const ShowQuiz = () => {
 					)}
 				</div>
 			</div>
+			{quizDetails.slug ? (
+				<div className="py-3 px-4 text-xl flex items-center">
+					Published, your public link is -
+					<p className="pl-3 text-quizzy-blue font-bold tracking-wide cursor-pointer">
+						{window.location.origin + "/public/" + quizDetails.slug}
+					</p>
+				</div>
+			) : (
+				""
+			)}
 			<div className="mt-4">
 				{questions &&
 					questions.map((obj, index) => {
@@ -78,7 +99,7 @@ const ShowQuiz = () => {
 									</h2>
 									<div className="pl-6">
 										<Link
-											to={`/quizzes/${id}/questions/${obj.question.id}/edit`}
+											to={`/admin/quizzes/${id}/questions/${obj.question.id}/edit`}
 											className="p-2 mr-3 bg-yellow-500"
 										>
 											Edit
