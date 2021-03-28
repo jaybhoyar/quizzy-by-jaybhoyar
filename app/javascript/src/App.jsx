@@ -35,27 +35,27 @@ const App = ({ currentUser }) => {
 						<Route exact path="/login" component={Login} />
 						<Route
 							exact
-							path="/quizzes/:id/show"
+							path="/admin/quizzes/:id/show"
 							component={ShowQuiz}
 						/>
 						<Route
 							exact
-							path="/quizzes/create"
+							path="/admin/quizzes/create"
 							component={CreateQuiz}
 						/>
 						<Route
 							exact
-							path="/quizzes/:id/edit"
+							path="/admin/quizzes/:id/edit"
 							component={EditQuiz}
 						/>
 						<Route
 							exact
-							path="/quizzes/:quiz_id/questions/create"
+							path="/admin/quizzes/:quiz_id/questions/create"
 							component={CreateQuestion}
 						/>
 						<Route
 							exact
-							path="/quizzes/:quiz_id/questions/:id/edit"
+							path="/admin/quizzes/:quiz_id/questions/:id/edit"
 							component={UpdateQuestion}
 						/>
 					</>

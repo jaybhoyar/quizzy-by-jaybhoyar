@@ -18,7 +18,9 @@ const NavBar = ({ currentUser }) => {
 		<nav className="bg-quizzy-navy-blue">
 			<div className="flex items-center justify-between h-16">
 				<div className="flex items-center ml-6">
-					<h1 className="text-white font-bold text-2xl">Quizzy</h1>
+					<Link to="/" className="text-white font-bold text-2xl">
+						Quizzy
+					</Link>
 				</div>
 				<div className="flex items-center justify-between mr-8">
 					{currentUser ? (

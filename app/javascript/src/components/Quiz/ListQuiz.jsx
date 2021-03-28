@@ -46,7 +46,7 @@ const ListQuizzes = () => {
 			accessor: "name",
 			Cell: ({ row }) => (
 				<Link
-					to={`/quizzes/${row.original.id}/show`}
+					to={`/admin/quizzes/${row.original.id}/show`}
 					className="cursor-pointer"
 				>
 					{row.original.name}
@@ -59,7 +59,7 @@ const ListQuizzes = () => {
 			Cell: ({ row }) => (
 				<div className="text-right pr-6">
 					<Link
-						to={`/quizzes/${row.original.id}/edit`}
+						to={`/admin/quizzes/${row.original.id}/edit`}
 						className="px-6 py-3 mr-6
             text-base font-medium leading-4 transition duration-150
             ease-in-out bg-yellow-500 border border-transparent rounded-md outline-none"

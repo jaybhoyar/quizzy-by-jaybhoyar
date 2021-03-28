@@ -24,7 +24,7 @@ const ShowQuiz = () => {
 	const destroyQuestion = async (question_id) => {
 		try {
 			await questionApi.destroy(id, question_id);
-			window.location.href = `/quizzes/${id}/show`;
+			window.location.href = `/admin/quizzes/${id}/show`;
 		} catch (error) {
 			//
 		}
@@ -53,7 +53,7 @@ const ShowQuiz = () => {
 				</div>
 				<div className="flex items-center justify-between">
 					<Link
-						to={`/quizzes/${quizDetails.id}/questions/create`}
+						to={`/admin/quizzes/${quizDetails.id}/questions/create`}
 						className="flex justify-center px-6 py-3 text-xl font-medium mr-4 
             leading-5 text-white bg-quizzy-teal border border-transparent rounded-md"
 					>
@@ -99,7 +99,7 @@ const ShowQuiz = () => {
 									</h2>
 									<div className="pl-6">
 										<Link
-											to={`/quizzes/${id}/questions/${obj.question.id}/edit`}
+											to={`/admin/quizzes/${id}/questions/${obj.question.id}/edit`}
 											className="p-2 mr-3 bg-yellow-500"
 										>
 											Edit

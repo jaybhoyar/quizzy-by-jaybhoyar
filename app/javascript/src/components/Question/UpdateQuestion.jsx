@@ -66,7 +66,7 @@ const UpdateQuestion = () => {
 					},
 				},
 			});
-			window.location.href = `/quizzes/${quiz_id}/show`;
+			window.location.href = `/admin/quizzes/${quiz_id}/show`;
 		} catch (error) {
 			//
 		}
