@@ -1,5 +1,5 @@
 class PublishesController < ApplicationController
-  before_action :load_quiz, only: %i[create show]
+  before_action :load_quiz, only: %i[create]
 
   def create
     if @quiz

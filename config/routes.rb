@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :questions, except: %i[new, edit]
   end
   resource :publishes, only: %i[create]
-  resource :public, only: %i[show]
+  resources :attempt, only: %i[show]
 
   get '/public/:slug' => "public#verify_slug"
   
