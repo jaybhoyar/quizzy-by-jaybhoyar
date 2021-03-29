@@ -1,10 +1,7 @@
 import React from "react";
 
-
 const AttemptQuiz = () => {
-	return (
-
-	);
+	return <></>;
 };
 
 export default AttemptQuiz;
