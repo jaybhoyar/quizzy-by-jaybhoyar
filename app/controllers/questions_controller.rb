@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
-  before_action :load_quiz, only: %i[create update show]
+  before_action :load_quiz, only: %i[create update show destroy]
   before_action :load_question, only: %i[update show destroy]
+  before_action :load_all_quiz_questions, only: %i[destroy]
 
   def create
     question = @quiz.questions.new(question_params)
@@ -33,6 +34,10 @@ class QuestionsController < ApplicationController
     if @question.blank?
       render status: :not_found, json: { notice: "Question not found" }
     elsif @question.destroy
+      if @quiz_questions.empty?
+        @quiz.slug = nil
+        @quiz.save
+      end
       render status: :ok, json: { notice: "Question deleted successfully!" }
     else
       render status: :unprocessable_entity, json: { error: @question.errors.full_messages.to_sentence }
@@ -46,6 +51,10 @@ class QuestionsController < ApplicationController
 
     def load_quiz
       @quiz = Quiz.find_by(id: params[:quiz_id])
+    end
+
+    def load_all_quiz_questions
+      @quiz_questions = @quiz.questions
     end
 
     def load_question
