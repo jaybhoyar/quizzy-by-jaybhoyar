@@ -1,12 +1,19 @@
 import React from "react";
 import { useParams } from "react-router";
+import CreateUser from "components/PublicQuiz/User/CreateUser";
 
 const ShowPublicQuiz = () => {
-	const { slug } = useParams();
-
 	return (
-		<div className="flex justify-center items-center min-h-screen">
-			<h2 className="text-2xl font-bold">Link is accessible</h2>
+		<div className="flex justify-center min-h-screen">
+			<div className="w-2/6 mx-auto p-5">
+				<h2
+					className="mt-6 text-4xl font-extrabold leading-9
+         text-center text-bb-gray-700"
+				>
+					Welcome to Quiz
+				</h2>
+				<CreateUser />
+			</div>
 		</div>
 	);
 };
