@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import CreateUser from "components/PublicQuiz/User/CreateUser";
 
 import attemptApi from "apis/attempt";
+import AttemptQuiz from "components/PublicQuiz/Attempt/AttemptQuiz";
 
 const ShowPublicQuiz = () => {
 	const { slug } = useParams();
@@ -25,7 +26,7 @@ const ShowPublicQuiz = () => {
 
 	return (
 		<div className="flex justify-center min-h-screen">
-			<div className="w-2/6 mx-auto p-5">
+			<div className="w-3/6 p-5">
 				{quizDetails && (
 					<h2
 						className="mt-6 text-4xl font-extrabold leading-9
@@ -34,7 +35,8 @@ const ShowPublicQuiz = () => {
 						{`Welcome to ${quizDetails.name} Quiz`}
 					</h2>
 				)}
-				<CreateUser />
+				{/* <CreateUser /> */}
+				<AttemptQuiz questions={questions} />
 			</div>
 		</div>
 	);
