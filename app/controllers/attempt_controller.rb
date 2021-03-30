@@ -6,6 +6,7 @@ class AttemptController < ApplicationController
     render status: :ok, json: { quiz: @quiz, questions: @quiz_questions }
   end
 
+
   private
     def find_quiz_with_slug
       @quiz = Quiz.find_by(slug: params[:id])
