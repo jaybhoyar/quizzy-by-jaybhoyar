@@ -1,18 +1,18 @@
 import React from "react";
 
 import Button from "components/Button";
-const AttemptQuiz = ({ questions }) => {
+const AttemptQuiz = ({ questions, handleSubmit }) => {
 	return (
 		<div className="py-10 w-full mx-auto">
-			<div className="mt-4">
+			<form className="mt-2" onSubmit={handleSubmit}>
 				{questions &&
 					questions.map((obj, index) => {
 						return (
-							<div key={index} className="mt-4">
-								<div
-									keys={index}
-									className="p-3 flex justify-start items-center"
-								>
+							<div
+								key={index}
+								className="mt-4 p-3 border bg-white"
+							>
+								<div className="flex justify-start items-center">
 									<span className="pr-6">{`Question ${
 										index + 1
 									}`}</span>
@@ -20,31 +20,33 @@ const AttemptQuiz = ({ questions }) => {
 										{obj.question.title}
 									</h2>
 								</div>
-								{obj.options.map((option, i) => {
-									return (
-										<div
-											key={i}
-											className="p-3 flex justify-start items-center"
-										>
-											<input
-												className="mr-16"
-												type="radio"
-												name={obj.question.title}
-												value={option.value}
-											/>
-											<h2 className="text-xl">
-												{option.value}
-											</h2>
-										</div>
-									);
-								})}
+								<div className="pl-16">
+									{obj.options.map((option, i) => {
+										return (
+											<div
+												key={i}
+												className="flex items-center"
+											>
+												<input
+													className="mr-4"
+													type="radio"
+													name={obj.question.title}
+													value={option.value}
+												/>
+												<h2 className="text-xl">
+													{option.value}
+												</h2>
+											</div>
+										);
+									})}
+								</div>
 							</div>
 						);
 					})}
-				<div className=" mt-6 flex justify-center items-center pr-12">
+				<div className=" mt-4 flex justify-center items-center pr-12">
 					<Button type="submit" buttonText="Submit" />
 				</div>
-			</div>
+			</form>
 		</div>
 	);
 };

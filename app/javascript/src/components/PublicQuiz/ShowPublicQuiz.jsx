@@ -21,6 +21,8 @@ const ShowPublicQuiz = () => {
 		}
 	};
 
+	const handleSubmit = () => {};
+
 	useEffect(() => {
 		fetchQuizDetails();
 	}, []);
@@ -36,20 +38,24 @@ const ShowPublicQuiz = () => {
 						{`Welcome to ${quizDetails.name} Quiz`}
 					</h2>
 				)}
-				{!participant.role ? (
+				{/* {!participant.role ? (
 					<CreateUser
 						setParticipant={setParticipant}
 						quiz={quizDetails}
 					/>
 				) : (
 					""
-				)}
+				)} */}
 
-				{participant.role === "standard" ? (
-					<AttemptQuiz questions={questions} />
-				) : (
+				{/* {participant.role === "standard" ? ( */}
+				<AttemptQuiz
+					questions={questions}
+					handleSubmit={handleSubmit}
+				/>
+
+				{/* ) : (
 					""
-				)}
+				)} */}
 			</div>
 		</div>
 	);

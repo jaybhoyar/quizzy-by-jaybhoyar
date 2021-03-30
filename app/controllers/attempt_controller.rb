@@ -20,6 +20,10 @@ class AttemptController < ApplicationController
     end
   end
 
+  def update
+    
+  end
+
   private
     def find_quiz_with_slug
       @quiz = Quiz.find_by(slug: params[:id])
