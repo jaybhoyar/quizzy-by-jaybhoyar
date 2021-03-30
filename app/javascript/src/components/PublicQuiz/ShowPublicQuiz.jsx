@@ -9,6 +9,7 @@ const ShowPublicQuiz = () => {
 	const { slug } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
 	const [questions, setQuestions] = useState([]);
+	const [participant, setParticipant] = useState("");
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -35,8 +36,17 @@ const ShowPublicQuiz = () => {
 						{`Welcome to ${quizDetails.name} Quiz`}
 					</h2>
 				)}
-				<CreateUser />
-				{/* <AttemptQuiz questions={questions} /> */}
+				{!participant.role ? (
+					<CreateUser setParticipant={setParticipant} />
+				) : (
+					""
+				)}
+
+				{participant.role === "standard" ? (
+					<AttemptQuiz questions={questions} />
+				) : (
+					""
+				)}
 			</div>
 		</div>
 	);

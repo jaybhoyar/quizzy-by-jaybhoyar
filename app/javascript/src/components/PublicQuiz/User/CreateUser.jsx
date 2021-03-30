@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import UserForm from "components/PublicQuiz/User/UserForm";
 import usersApi from "apis/user";
 
-const CreateUser = () => {
+const CreateUser = ({ setParticipant }) => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ const CreateUser = () => {
 			const response = await usersApi.create({
 				user: { first_name: firstName, last_name: lastName, email },
 			});
-			console.log(response.data);
+			setParticipant(response.data.user);
 		} catch (error) {
 			//
 		}
