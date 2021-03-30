@@ -37,7 +37,10 @@ const ShowPublicQuiz = () => {
 					</h2>
 				)}
 				{!participant.role ? (
-					<CreateUser setParticipant={setParticipant} />
+					<CreateUser
+						setParticipant={setParticipant}
+						quiz={quizDetails}
+					/>
 				) : (
 					""
 				)}

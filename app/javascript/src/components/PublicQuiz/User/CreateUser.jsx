@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import UserForm from "components/PublicQuiz/User/UserForm";
 import attemptApi from "apis/attempt";
 
-const CreateUser = ({ setParticipant }) => {
+const CreateUser = ({ setParticipant, quiz }) => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -12,6 +12,7 @@ const CreateUser = ({ setParticipant }) => {
 		event.preventDefault();
 		try {
 			const response = await attemptApi.create({
+				quiz,
 				user: { first_name: firstName, last_name: lastName, email },
 			});
 			setParticipant(response.data.user);

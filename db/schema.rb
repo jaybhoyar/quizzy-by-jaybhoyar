@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_03_30_094013) do
 
   create_table "attempts", force: :cascade do |t|
-    t.boolean "submitted", null: false
+    t.boolean "submitted", default: false, null: false
     t.integer "user_id", null: false
     t.integer "quiz_id", null: false
     t.datetime "created_at", precision: 6, null: false
