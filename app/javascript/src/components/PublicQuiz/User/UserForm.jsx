@@ -3,15 +3,7 @@ import React from "react";
 import Input from "components/Input";
 import Button from "components/Button";
 
-const UserForm = ({
-	firstName,
-	setFirstName,
-	lastName,
-	setLastName,
-	email,
-	setEmail,
-	handleSubmit,
-}) => {
+const UserForm = ({ setFirstName, setLastName, setEmail, handleSubmit }) => {
 	return (
 		<div className="w-full max-w-md">
 			<form className="mt-8" onSubmit={handleSubmit}>
@@ -33,7 +25,6 @@ const UserForm = ({
 					placeholder="sam@example.com"
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-
 				<Button type="submit" buttonText="Next" />
 			</form>
 		</div>

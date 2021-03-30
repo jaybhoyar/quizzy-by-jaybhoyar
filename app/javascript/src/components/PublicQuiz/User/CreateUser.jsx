@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import UserForm from "components/PublicQuiz/User/UserForm";
+import usersApi from "apis/user";
 
 const CreateUser = () => {
 	const [firstName, setFirstName] = useState("");
@@ -9,15 +10,20 @@ const CreateUser = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		try {
+			const response = await usersApi.create({
+				user: { first_name: firstName, last_name: lastName, email },
+			});
+			console.log(response.data);
+		} catch (error) {
+			//
+		}
 	};
 
 	return (
 		<UserForm
-			firstName={firstName}
 			setFirstName={setFirstName}
-			lastName={lastName}
 			setLastName={setLastName}
-			email={email}
 			setEmail={setEmail}
 			handleSubmit={handleSubmit}
 		/>

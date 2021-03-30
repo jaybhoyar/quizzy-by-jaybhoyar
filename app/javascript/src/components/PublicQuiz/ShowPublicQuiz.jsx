@@ -35,8 +35,8 @@ const ShowPublicQuiz = () => {
 						{`Welcome to ${quizDetails.name} Quiz`}
 					</h2>
 				)}
-				{/* <CreateUser /> */}
-				<AttemptQuiz questions={questions} />
+				<CreateUser />
+				{/* <AttemptQuiz questions={questions} /> */}
 			</div>
 		</div>
 	);

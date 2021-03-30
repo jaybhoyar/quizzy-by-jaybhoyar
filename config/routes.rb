@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resource :sessions, only: %i[create destroy]
   resources :quizzes, except: %i[new, edit] do
-   
     resources :questions, except: %i[new, edit]
   end
+  resources :users, only: %i[create]
   resource :publishes, only: %i[create]
   resources :attempt, only: %i[show]
 
