@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import UserForm from "components/PublicQuiz/User/UserForm";
-import usersApi from "apis/user";
+import attemptApi from "apis/attempt";
 
 const CreateUser = ({ setParticipant }) => {
 	const [firstName, setFirstName] = useState("");
@@ -11,7 +11,7 @@ const CreateUser = ({ setParticipant }) => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			const response = await usersApi.create({
+			const response = await attemptApi.create({
 				user: { first_name: firstName, last_name: lastName, email },
 			});
 			setParticipant(response.data.user);
