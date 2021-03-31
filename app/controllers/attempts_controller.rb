@@ -59,6 +59,9 @@ class AttemptsController < ApplicationController
 
     def load_attempt
       @attempt = Attempt.find_by(id: params[:id])
+      if @attempt.blank?
+        render status: :not_found, json: { notice: "Attempt not found" }
+      end
     end
 
     def load_questions_with_options
