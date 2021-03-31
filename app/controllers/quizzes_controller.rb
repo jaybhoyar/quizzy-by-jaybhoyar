@@ -17,18 +17,11 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    if @quiz
-      render status: :ok, json: { quiz: @quiz, questions: @quiz_questions }
-    else
-      render status: :not_found, json: { notice: "Quiz not found" }
-    end
+    render status: :ok, json: { quiz: @quiz, questions: @quiz_questions }
   end
 
-
   def update
-    if @quiz.blank?
-      render status: :not_found, json: { notice: "Quiz not found" }
-    elsif @quiz.update(quiz_params)
+    if @quiz.update(quiz_params)
       render status: :ok, json: { notice: "Quiz updated successfully!" }
     else
       render status: :unprocessable_entity, json: { error: @quiz.errors.full_messages.to_sentence }
@@ -36,9 +29,7 @@ class QuizzesController < ApplicationController
   end
 
   def destroy
-    if @quiz.blank?
-      render status: :not_found, json: { notice: "Quiz not found" }
-    elsif @quiz.destroy
+    if @quiz.destroy
       render status: :ok, json: { notice: "Quiz deleted successfully!" }
     else
       render status: :unprocessable_entity, json: { error: @quiz.errors.full_messages.to_sentence }
@@ -53,12 +44,14 @@ class QuizzesController < ApplicationController
 
     def load_quiz
       @quiz = Quiz.find_by(id: params[:id])
+      if @quiz.blank?
+        render status: :not_found, json: { notice: "Quiz not found" }
+      end
     end
 
     def load_questions_with_options
       questions = @quiz.questions.includes(:options)
       @quiz_questions = questions.map { |question| { question: question, options: question.options } }
     end
-
 
 end

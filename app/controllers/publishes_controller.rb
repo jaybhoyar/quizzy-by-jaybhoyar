@@ -2,9 +2,8 @@ class PublishesController < ApplicationController
   before_action :load_quiz, only: %i[create]
 
   def create
-    if @quiz
       @quiz.generate_slug
-      @quiz.save
+    if @quiz.save
       render status: :ok, json: { notice: "Quiz published successfully" }
     else
       render status: :unprocessable_entity, json: { error: "Something went wrong" }
@@ -14,7 +13,9 @@ class PublishesController < ApplicationController
   private 
     def load_quiz
       @quiz = Quiz.find_by(id:params[:quiz_id])
-      puts @quiz.to_s
+      if @quiz.blank?
+        render status: :not_found, json: { notice: "Quiz not found" }
+      end
     end
   
 end
