@@ -24,18 +24,22 @@ const NavBar = ({ currentUser }) => {
 				</div>
 				<div className="flex items-center justify-between mr-8">
 					{currentUser ? (
-						<h2 className="text-lg pt-1 pr-3 leading-5 text-quizzy-teal font-medium	border-gray-600 border-r">
-							{`${currentUser.first_name} ${currentUser.last_name}`}
-						</h2>
+						<>
+							<Link className="text-base pt-1 pr-4 leading-5 uppercase text-quizzy-gray font-medium	border-gray-600 cursor-pointer">
+								Reports
+							</Link>
+							<h2 className="text-base pt-1 pr-4 leading-5 uppercase text-quizzy-gray font-medium	border-gray-600">
+								{`${currentUser.first_name} ${currentUser.last_name}`}
+							</h2>
+						</>
 					) : (
 						""
 					)}
 					{currentUser ? (
 						<a
 							onClick={handleLogout}
-							className="inline-flex items-center pl-3 pt-1 
-							transition duration-150 ease-in-out font-medium	text-lg leading-5
-							text-white cursor-pointer"
+							className="text-base inline-flex items-center pl-3 pt-1 font-medium uppercase leading-5
+							text-quizzy-gray cursor-pointer"
 						>
 							Logout
 						</a>
@@ -43,9 +47,8 @@ const NavBar = ({ currentUser }) => {
 						<Link
 							to="/login"
 							className="inline-flex items-center pl-3 pt-1
-												transition duration-150 ease-in-out
-												font-semibold text-lg leading-5
-												text-white cursor-pointer"
+												font-semibold text-base uppercase leading-5
+												text-quizzy-gray cursor-pointer"
 						>
 							Login
 						</Link>
