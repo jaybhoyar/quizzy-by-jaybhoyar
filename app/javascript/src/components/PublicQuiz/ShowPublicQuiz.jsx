@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CreateUser from "components/PublicQuiz/User/CreateUser";
 
 import attemptApi from "apis/attempt";
 import AttemptQuiz from "components/PublicQuiz/Attempt/AttemptQuiz";
+import { attempt } from "lodash";
 
 const ShowPublicQuiz = () => {
 	const { slug } = useParams();
@@ -22,18 +22,33 @@ const ShowPublicQuiz = () => {
 		}
 	};
 
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		try {
+			const res = await attemptApi.update({
+				id: 1,
+				payload: {
+					attempt_answers_attributes: answers,
+				},
+			});
+
+			console.log(res.data);
+		} catch (error) {
+			//
+		}
+	};
+
 	const handleAnswer = (option, question, index) => {
 		const newAnswers = [...answers];
 		const filteredOptions = newAnswers.filter(
 			(ans, i) => ans.question_id !== question.id
 		);
-		filteredOptions.push({ question_id: question.id, value: option.value });
+		filteredOptions.push({
+			question_id: question.id,
+			value: option.value,
+			attempt_id: 1,
+		});
 		setAnswers(filteredOptions);
-	};
-
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-
 	};
 
 	useEffect(() => {

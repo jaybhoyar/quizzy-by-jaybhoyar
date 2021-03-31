@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: %i[create]
   resource :publishes, only: %i[create]
-  resources :attempt, only: %i[show create]
+  resources :attempt, only: %i[show create update]
 
   get '/public/:slug' => "public#verify_slug"
   
