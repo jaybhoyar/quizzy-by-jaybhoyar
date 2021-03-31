@@ -13,12 +13,12 @@ const ShowPublicQuiz = () => {
 	const [participant, setParticipant] = useState("");
 	const [attempt, setAttempt] = useState("");
 	const [answers, setAnswers] = useState([]);
-	const [submitted, setSubmitted] = useState(false);
+	const [stage, setStage] = useState("USERFORM");
 	const [attemptedAnswers, setAttemptedAnswers] = useState([]);
 
 	const fetchQuizDetails = async () => {
 		try {
-			const response = await attemptApi.show(slug);
+			const response = await attemptApi.showQuiz(slug);
 			setQuizDetails(response.data.quiz);
 			setQuestions(response.data.questions);
 		} catch (error) {
@@ -36,7 +36,7 @@ const ShowPublicQuiz = () => {
 				},
 			});
 			buildAttemptedResult(res.data.attempt_answers, questions);
-			setSubmitted(true);
+			setStage("QUIZRESULT");
 		} catch (error) {
 			//
 		}
@@ -85,32 +85,37 @@ const ShowPublicQuiz = () => {
 						{`Welcome to ${quizDetails.name} Quiz`}
 					</h2>
 				)}
-				{!participant.role ? (
-					<CreateUser
-						setParticipant={setParticipant}
-						setAttempt={setAttempt}
-						quiz={quizDetails}
-					/>
-				) : (
-					""
-				)}
 
-				{submitted && participant.role === "standard" ? (
-					<ResultQuiz attemptedAnswers={attemptedAnswers} />
-				) : (
-					""
-				)}
-
-				{participant.role === "standard" && submitted === false ? (
-					<AttemptQuiz
-						questions={questions}
-						answers={answers}
-						handleAnswer={handleAnswer}
-						handleSubmit={handleSubmit}
-					/>
-				) : (
-					""
-				)}
+				{(() => {
+					switch (stage) {
+						case "USERFORM":
+							return (
+								<CreateUser
+									setParticipant={setParticipant}
+									setAttempt={setAttempt}
+									quiz={quizDetails}
+									setStage={setStage}
+								/>
+							);
+						case "ATTEMPTQUIZ":
+							return (
+								<AttemptQuiz
+									questions={questions}
+									answers={answers}
+									handleAnswer={handleAnswer}
+									handleSubmit={handleSubmit}
+								/>
+							);
+						case "QUIZRESULT":
+							return (
+								<ResultQuiz
+									attemptedAnswers={attemptedAnswers}
+								/>
+							);
+						default:
+							return <div></div>;
+					}
+				})()}
 			</div>
 		</div>
 	);

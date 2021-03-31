@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import UserForm from "components/PublicQuiz/User/UserForm";
 import attemptApi from "apis/attempt";
 
-const CreateUser = ({ setParticipant, setAttempt, quiz }) => {
+const CreateUser = ({ setParticipant, setAttempt, setStage }) => {
+	const { slug } = useParams();
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -12,11 +14,14 @@ const CreateUser = ({ setParticipant, setAttempt, quiz }) => {
 		event.preventDefault();
 		try {
 			const response = await attemptApi.create({
-				quiz,
-				user: { first_name: firstName, last_name: lastName, email },
+				slug,
+				payload: {
+					user: { first_name: firstName, last_name: lastName, email },
+				},
 			});
 			setAttempt(response.data.attempt);
 			setParticipant(response.data.user);
+			setStage("ATTEMPTQUIZ");
 		} catch (error) {
 			//
 		}
