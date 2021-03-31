@@ -21,13 +21,13 @@ class AttemptsController < ApplicationController
     end
     attempt = Attempt.find_by(quiz_id: @quiz.id, user_id: @user.id)
     if attempt.nil?
-        attempt = Attempt.new(quiz_id: @quiz.id, user_id: @user.id)
-        attempt.save
+      attempt = Attempt.new(quiz_id: @quiz.id, user_id: @user.id)
+      attempt.save
     end
 
     if @user.present? && attempt.present? 
-      render status: :ok, json: { notice: "User created successfully!",attempt: attempt, 
-         user: @user.attributes.except("password_digest"), }
+      render status: :ok, json: { notice: "User created successfully!", attempt: attempt, 
+        user: @user.attributes.except("password_digest"), }
     else
       render status: :unprocessable_entity, json: { error: "Something Went Wrong" }
     end
@@ -37,12 +37,12 @@ class AttemptsController < ApplicationController
     if @attempt.present?
       @attempt.update(attempt_params)
       @attempt.submitted = true
-    if   @attempt.save
-      render status: :ok, json: { notice: "Quiz submitted successfully"}
-    else
-      render status: :unprocessable_entity, json: { error: @attempt.errors.full_messages.to_sentence }
+      if @attempt.save
+        render status: :ok, json: { notice: "Quiz submitted successfully"}
+      else
+        render status: :unprocessable_entity, json: { error: @attempt.errors.full_messages.to_sentence }
+      end
     end
-  end
   end
 
   private
@@ -71,6 +71,10 @@ class AttemptsController < ApplicationController
 
     def attempt_params
       params.require(:attempt).permit(attempt_answers_attributes: [:value, :question_id, :attempt_id])
+    end
+
+    def calculate_correct_answers
+      puts #{@attempt.attempt_answers}
     end
 
     
