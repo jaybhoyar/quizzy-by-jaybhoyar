@@ -69,7 +69,7 @@ const ResultQuiz = ({ slug, attemptId }) => {
 											{option.is_correct ? (
 												<h2 className="text-xl">
 													{option.value}
-													<span className="ml-4 p-2 text-base bg-green-400 rounded-md">
+													<span className="ml-4 p-2 text-base bg-quizzy-green rounded-md">
 														Correct Answer
 													</span>
 												</h2>
