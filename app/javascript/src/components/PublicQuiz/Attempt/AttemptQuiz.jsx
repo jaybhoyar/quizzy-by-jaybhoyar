@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "components/Button";
-const AttemptQuiz = ({ questions, handleSubmit }) => {
+const AttemptQuiz = ({ questions, answers, handleAnswer, handleSubmit }) => {
 	return (
 		<div className="py-10 w-full mx-auto">
 			<form className="mt-2" onSubmit={handleSubmit}>
@@ -20,17 +20,24 @@ const AttemptQuiz = ({ questions, handleSubmit }) => {
 										{obj.question.title}
 									</h2>
 								</div>
-								<div className="pl-16">
+								<div className="pl-20">
 									{obj.options.map((option, i) => {
 										return (
 											<div
 												key={i}
-												className="flex items-center"
+												className="p-3 flex justify-start items-center"
 											>
 												<input
-													className="mr-4"
+													className="mr-16"
 													type="radio"
 													name={obj.question.title}
+													onChange={() =>
+														handleAnswer(
+															option,
+															obj.question,
+															index
+														)
+													}
 													value={option.value}
 												/>
 												<h2 className="text-xl">

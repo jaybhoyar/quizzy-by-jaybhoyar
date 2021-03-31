@@ -10,6 +10,7 @@ const ShowPublicQuiz = () => {
 	const [quizDetails, setQuizDetails] = useState("");
 	const [questions, setQuestions] = useState([]);
 	const [participant, setParticipant] = useState("");
+	const [answers, setAnswers] = useState([]);
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -21,7 +22,19 @@ const ShowPublicQuiz = () => {
 		}
 	};
 
-	const handleSubmit = () => {};
+	const handleAnswer = (option, question, index) => {
+		const newAnswers = [...answers];
+		const filteredOptions = newAnswers.filter(
+			(ans, i) => ans.question_id !== question.id
+		);
+		filteredOptions.push({ question_id: question.id, value: option.value });
+		setAnswers(filteredOptions);
+	};
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+	};
 
 	useEffect(() => {
 		fetchQuizDetails();
@@ -50,6 +63,8 @@ const ShowPublicQuiz = () => {
 				{/* {participant.role === "standard" ? ( */}
 				<AttemptQuiz
 					questions={questions}
+					answers={answers}
+					handleAnswer={handleAnswer}
 					handleSubmit={handleSubmit}
 				/>
 

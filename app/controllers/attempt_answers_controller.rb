@@ -1,0 +1,2 @@
+class AttemptAnswersController < ApplicationController
+end
