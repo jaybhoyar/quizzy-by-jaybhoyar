@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   resource :sessions, only: %i[create destroy]
   resources :quizzes, except: %i[new, edit] do
-   
     resources :questions, except: %i[new, edit]
   end
+
   resource :publishes, only: %i[create]
-  resource :public, only: %i[show]
-  
+  resource :public, path: "public/:slug/", only: %i[show] do
+   resources :attempts, only: %i[show create update new]
+  end
   
   
   root "home#index"
