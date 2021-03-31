@@ -2,15 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import attemptApi from "apis/attempt";
+import CreateUser from "components/PublicQuiz/User/CreateUser";
 import AttemptQuiz from "components/PublicQuiz/Attempt/AttemptQuiz";
-import { attempt } from "lodash";
+import ResultQuiz from "components/PublicQuiz/Attempt/ResultQuiz";
 
 const ShowPublicQuiz = () => {
 	const { slug } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
 	const [questions, setQuestions] = useState([]);
 	const [participant, setParticipant] = useState("");
+	const [attempt, setAttempt] = useState("");
 	const [answers, setAnswers] = useState([]);
+	const [submitted, setSubmitted] = useState(false);
+	const [attemptedAnswers, setAttemptedAnswers] = useState([]);
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -26,16 +30,31 @@ const ShowPublicQuiz = () => {
 		event.preventDefault();
 		try {
 			const res = await attemptApi.update({
-				id: 1,
+				id: attempt.id,
 				payload: {
 					attempt_answers_attributes: answers,
 				},
 			});
-
-			console.log(res.data);
+			buildAttemptedResult(res.data.attempt_answers, questions);
+			setSubmitted(true);
 		} catch (error) {
 			//
 		}
+	};
+
+	const buildAttemptedResult = (userAnswers, questions) => {
+		const obj = {};
+		userAnswers.forEach(({ value, question_id }) => {
+			obj[question_id] = value;
+		});
+
+		const result = questions.map(({ question, options }) => {
+			return {
+				question: { ...question, choosedOption: obj[question_id] },
+				options,
+			};
+		});
+		setAttemptedAnswers(result);
 	};
 
 	const handleAnswer = (option, question, index) => {
@@ -46,7 +65,7 @@ const ShowPublicQuiz = () => {
 		filteredOptions.push({
 			question_id: question.id,
 			value: option.value,
-			attempt_id: 1,
+			attempt_id: attempt.id,
 		});
 		setAnswers(filteredOptions);
 	};
@@ -66,26 +85,32 @@ const ShowPublicQuiz = () => {
 						{`Welcome to ${quizDetails.name} Quiz`}
 					</h2>
 				)}
-				{/* {!participant.role ? (
+				{!participant.role ? (
 					<CreateUser
 						setParticipant={setParticipant}
+						setAttempt={setAttempt}
 						quiz={quizDetails}
 					/>
 				) : (
 					""
-				)} */}
+				)}
 
-				{/* {participant.role === "standard" ? ( */}
-				<AttemptQuiz
-					questions={questions}
-					answers={answers}
-					handleAnswer={handleAnswer}
-					handleSubmit={handleSubmit}
-				/>
-
-				{/* ) : (
+				{submitted && participant.role === "standard" ? (
+					<ResultQuiz attemptedAnswers={attemptedAnswers} />
+				) : (
 					""
-				)} */}
+				)}
+
+				{participant.role === "standard" && submitted === false ? (
+					<AttemptQuiz
+						questions={questions}
+						answers={answers}
+						handleAnswer={handleAnswer}
+						handleSubmit={handleSubmit}
+					/>
+				) : (
+					""
+				)}
 			</div>
 		</div>
 	);

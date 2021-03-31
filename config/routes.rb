@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   resources :quizzes, except: %i[new, edit] do
     resources :questions, except: %i[new, edit]
   end
-  resources :users, only: %i[create]
-  resource :publishes, only: %i[create]
-  resources :attempt, only: %i[show create update]
 
-  get '/public/:slug' => "public#verify_slug"
+  resource :publishes, only: %i[create]
+  resource :public, path: "public/:slug/", only: %i[show] do
+   resources :attempts, only: %i[show create update]
+  end
+  
   
   root "home#index"
   get '*path', to: 'home#index', via: :all

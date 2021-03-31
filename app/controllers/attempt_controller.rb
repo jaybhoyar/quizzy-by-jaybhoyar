@@ -9,7 +9,7 @@ class AttemptController < ApplicationController
   end
 
   def create
-    if @user.save 
+    attempt = Attempt.find_by(quiz_id: , user_id: @user.id)
         attempt = Attempt.new(quiz_id: quiz_params[:id], user_id: @user.id)
       if attempt.save
         render status: :ok, json: { notice: "User created successfully!", user: @user, attempt: attempt}
@@ -22,14 +22,16 @@ class AttemptController < ApplicationController
   end
 
   def update
-    if @attempt.present?
+    if @attempt.present? && !@attempt.submitted
       @attempt.submitted = true
-      @attempt.save
-      @attempt.update(attempt_params)
-      calculate_result(@attempt)
-      render status: :ok, json: { notice: "Quiz submitted successfully"}
+      if @attempt.save
+        @attempt.update(attempt_params)
+        render status: :ok, json: { notice: "Quiz submitted successfully", attempt_answers: @attempt.attempt_answers}
+      else
+        render status: :unprocessable_entity, json: { error: @attempt.errors.full_messages.to_sentence }
+      end
     else
-      render status: :unprocessable_entity, json: { error: @question.errors.full_messages.to_sentence }
+      render status: :unprocessable_entity, json: { error: @attempt.errors.full_messages.to_sentence }
     end
   end
 
@@ -50,7 +52,7 @@ class AttemptController < ApplicationController
     end
 
     def load_attempt
-      @attempt_to_update = Attempt.find_by(id: params[:id])
+      @attempt = Attempt.find_by(id: params[:id])
     end
 
     def attempt_params
@@ -62,8 +64,12 @@ class AttemptController < ApplicationController
     end
     
     def create_user
-      @user = User.new(user_params)
-      @user.password = @user.password_confirmation = "defaultpassword"
+      @user = User.find_by(email: user_params[:email])
+      if @user.nil
+        @user = User.new(user_params)
+        @user.password = @user.password_confirmation = "defaultpassword"
+        @user.save
+      end
     end
     
 end
