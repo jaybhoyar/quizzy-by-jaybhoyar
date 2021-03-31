@@ -61,8 +61,6 @@ class AttemptsController < ApplicationController
       @attempt = Attempt.find_by(id: params[:id])
     end
 
-   
-    
     def load_questions_with_options
       questions = @quiz.questions.includes(:options)
       @quiz_questions = questions.map { |question| { question: question, options: question.options} }

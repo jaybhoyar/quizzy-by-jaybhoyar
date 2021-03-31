@@ -8,7 +8,7 @@ class AttemptTest < ActiveSupport::TestCase
 
     @user = User.new(first_name: "Eve", last_name: "Smith", email: "eve@example.com",
       password: "12345", password_confirmation: "123456", role:"standard")
-    @attempt = Attempt.create(user_id: @user.id, quiz_id: @quiz.id)
+    @attempt = Attempt.new(user_id: @user.id, quiz_id: @quiz.id)
   end
 
   def test_attempt_should_be_valid
