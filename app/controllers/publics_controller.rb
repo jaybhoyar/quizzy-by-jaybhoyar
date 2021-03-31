@@ -1,5 +1,5 @@
-class PublicController < ApplicationController
-  before_action :find_quiz_with_slug, only: %i[verify_slug]
+class PublicsController < ApplicationController
+  before_action :find_quiz_with_slug, only: %i[show]
  
   def show
     redirect_to "#{request.base_url}/public/#{@quiz.slug}/attempts/new"

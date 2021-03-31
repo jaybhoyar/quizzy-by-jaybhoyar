@@ -26,7 +26,7 @@ const App = ({ currentUser }) => {
 				<Switch>
 					<Route
 						exact
-						path="/public/:slug/attempts/new"
+						path="/public/:slug/attempt/new"
 						component={ShowPublicQuiz}
 					/>
 					<>

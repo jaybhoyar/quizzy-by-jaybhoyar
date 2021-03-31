@@ -1,5 +1,5 @@
-class AttemptController < ApplicationController
-  before_action :find_quiz_with_slug, only: %i[show]
+class AttemptsController < ApplicationController
+  before_action :find_quiz_with_slug, only: %i[show update create]
   before_action :load_questions_with_options, only: %i[show]
   before_action :create_user, only: %i[create]
   before_action :load_attempt, only: %i[update]
@@ -45,10 +45,6 @@ class AttemptController < ApplicationController
     def load_questions_with_options
       questions = @quiz.questions.includes(:options)
       @quiz_questions = questions.map { |question| { question: question, options: question.options } }
-    end
-
-    def quiz_params
-      params.require(:quiz).permit(:id)
     end
 
     def load_attempt
