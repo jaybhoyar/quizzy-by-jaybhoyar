@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "components/Button";
-const AttemptQuiz = ({ questions, answers, handleAnswer, handleSubmit }) => {
+const AttemptQuiz = ({ questions, handleAnswer, handleSubmit }) => {
 	return (
 		<div className="py-10 w-full mx-auto">
 			<form className="mt-2" onSubmit={handleSubmit}>

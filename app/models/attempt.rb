@@ -6,4 +6,6 @@ class Attempt < ApplicationRecord
   accepts_nested_attributes_for :attempt_answers, allow_destroy: true
   
   validates :user_id, presence: true
+  validates :quiz_id, presence: true
+
 end

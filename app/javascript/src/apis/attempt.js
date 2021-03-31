@@ -2,7 +2,8 @@ import axios from "axios";
 
 const showQuiz = (slug) => axios.get(`/public/${slug}/attempts/new`);
 
-const show = (slug, id) => axios.get(`/public/${slug}/attempts/${id}`);
+const showQuizWithAnswers = (slug, id) =>
+	axios.get(`/public/${slug}/attempts/${id}`);
 
 const create = ({ slug, payload }) =>
 	axios.post(`/public/${slug}/attempts`, payload);
@@ -12,7 +13,7 @@ const update = ({ slug, id, payload }) =>
 
 const attemptApi = {
 	showQuiz,
-	show,
+	showQuizWithAnswers,
 	create,
 	update,
 };

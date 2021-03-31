@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const ResultQuiz = ({ attemptedAnswers }) => {
-	console.log(attemptedAnswers, "----");
+import attemptApi from "apis/attempt";
+
+const ResultQuiz = ({ slug, attemptId }) => {
+	const [finalResult, setFinalResult] = useState([]);
+	const [quiz, setQuiz] = useState("");
+
+	const buildFinalResult = (userAnswers, questions) => {
+		const obj = {};
+		userAnswers.forEach(({ question_id, value }) => {
+			obj[question_id] = value;
+		});
+		const result = questions.map(({ question, options }) => {
+			return {
+				question: { ...question, choosedOption: obj[question.id] },
+				options,
+			};
+		});
+		setFinalResult(result);
+	};
+
+	const getQuizWithAnswers = async () => {
+		try {
+			const res = await attemptApi.showQuizWithAnswers(slug, attemptId);
+			buildFinalResult(res.data.attempted_answers, res.data.questions);
+			setQuiz(res.data.quiz);
+		} catch (error) {
+			//
+		}
+	};
+
+	useEffect(() => {
+		getQuizWithAnswers();
+	}, []);
+
 	return (
 		<div className="py-10 w-full mx-auto">
-			results
-			{/* {questions &&
-				questions.map((obj, index) => {
+			{console.log(finalResult)}
+			{finalResult &&
+				finalResult.map((obj, index) => {
 					return (
 						<div key={index} className="mt-4 p-3 border bg-white">
 							<div className="flex justify-start items-center">
@@ -28,25 +60,31 @@ const ResultQuiz = ({ attemptedAnswers }) => {
 												className="mr-16"
 												type="radio"
 												name={obj.question.title}
-												onChange={() =>
-													handleAnswer(
-														option,
-														obj.question,
-														index
-													)
-												}
 												value={option.value}
+												checked={
+													option.value ===
+													obj.question.choosedOption
+												}
 											/>
-											<h2 className="text-xl">
-												{option.value}
-											</h2>
+											{option.is_correct ? (
+												<h2 className="text-xl">
+													{option.value}
+													<span className="ml-4 p-2 text-base bg-green-400 rounded-md">
+														Correct Answer
+													</span>
+												</h2>
+											) : (
+												<h2 className="text-xl">
+													{option.value}
+												</h2>
+											)}
 										</div>
 									);
 								})}
 							</div>
 						</div>
 					);
-				})} */}
+				})}
 		</div>
 	);
 };

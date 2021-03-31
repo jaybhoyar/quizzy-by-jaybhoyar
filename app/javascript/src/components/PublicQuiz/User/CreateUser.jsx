@@ -21,7 +21,11 @@ const CreateUser = ({ setParticipant, setAttempt, setStage }) => {
 			});
 			setAttempt(response.data.attempt);
 			setParticipant(response.data.user);
-			setStage("ATTEMPTQUIZ");
+			if (response.data.attempt.submitted) {
+				setStage("QUIZRESULT");
+			} else {
+				setStage("ATTEMPTQUIZ");
+			}
 		} catch (error) {
 			//
 		}

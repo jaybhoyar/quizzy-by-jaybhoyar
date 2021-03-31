@@ -14,7 +14,6 @@ const ShowPublicQuiz = () => {
 	const [attempt, setAttempt] = useState("");
 	const [answers, setAnswers] = useState([]);
 	const [stage, setStage] = useState("USERFORM");
-	const [attemptedAnswers, setAttemptedAnswers] = useState([]);
 
 	const fetchQuizDetails = async () => {
 		try {
@@ -29,32 +28,17 @@ const ShowPublicQuiz = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		try {
-			const res = await attemptApi.update({
+			await attemptApi.update({
+				slug,
 				id: attempt.id,
 				payload: {
 					attempt_answers_attributes: answers,
 				},
 			});
-			buildAttemptedResult(res.data.attempt_answers, questions);
 			setStage("QUIZRESULT");
 		} catch (error) {
 			//
 		}
-	};
-
-	const buildAttemptedResult = (userAnswers, questions) => {
-		const obj = {};
-		userAnswers.forEach(({ value, question_id }) => {
-			obj[question_id] = value;
-		});
-
-		const result = questions.map(({ question, options }) => {
-			return {
-				question: { ...question, choosedOption: obj[question_id] },
-				options,
-			};
-		});
-		setAttemptedAnswers(result);
 	};
 
 	const handleAnswer = (option, question, index) => {
@@ -101,7 +85,6 @@ const ShowPublicQuiz = () => {
 							return (
 								<AttemptQuiz
 									questions={questions}
-									answers={answers}
 									handleAnswer={handleAnswer}
 									handleSubmit={handleSubmit}
 								/>
@@ -109,7 +92,8 @@ const ShowPublicQuiz = () => {
 						case "QUIZRESULT":
 							return (
 								<ResultQuiz
-									attemptedAnswers={attemptedAnswers}
+									slug={slug}
+									attemptId={attempt.id}
 								/>
 							);
 						default:
