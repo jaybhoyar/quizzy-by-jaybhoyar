@@ -25,7 +25,10 @@ const NavBar = ({ currentUser }) => {
 				<div className="flex items-center justify-between mr-8">
 					{currentUser ? (
 						<>
-							<Link className="text-base pt-1 pr-4 leading-5 uppercase text-quizzy-gray font-medium	border-gray-600 cursor-pointer">
+							<Link
+								to="/admin/reports"
+								className="text-base pt-1 pr-4 leading-5 uppercase text-quizzy-gray font-medium	border-gray-600 cursor-pointer"
+							>
 								Reports
 							</Link>
 							<h2 className="text-base pt-1 pr-4 leading-5 uppercase text-quizzy-gray font-medium	border-gray-600">
