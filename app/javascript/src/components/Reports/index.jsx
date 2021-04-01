@@ -26,7 +26,7 @@ const Reports = () => {
 		},
 		{
 			Header: "User name",
-			accessor: "user.first_name + user.last_name",
+			accessor: (row) => `${row.user.first_name} ${row.user.last_name}`,
 		},
 		{
 			Header: "Email",

@@ -23,7 +23,7 @@ const Table = ({ data, columns }) => {
 								<th
 									key={index}
 									{...column.getHeaderProps()}
-									className="py-4 text-xl text-white text-left pl-6"
+									className="py-4 font-normal	text-base uppercase text-base text-white text-left pl-6"
 								>
 									{column.render("Header")}
 								</th>
@@ -45,7 +45,7 @@ const Table = ({ data, columns }) => {
 										<td
 											key={i}
 											{...cell.getCellProps()}
-											className="text-xl font-medium leading-4 py-4 text-left pl-6 border-b border-gray-300"
+											className="text-base font-medium text-gray-700 leading-4 py-3 text-left pl-6 border-b border-gray-300"
 										>
 											{cell.render("Cell")}
 										</td>
