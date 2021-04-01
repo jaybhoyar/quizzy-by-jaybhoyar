@@ -15,6 +15,7 @@ module.exports = {
 				"quizzy-light-orange": "#f29266",
 				"quizzy-error-red": "#fc1f0f",
 				"quizzy-error-bg": "#f8d7da",
+				"quizzy-gray": "#b7c9cc",
 				"bb-purple": "#5469D4",
 				"bb-env": "#F1F5F9",
 				"bb-border": "#E4E4E7",

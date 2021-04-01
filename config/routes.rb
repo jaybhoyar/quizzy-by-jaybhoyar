@@ -6,8 +6,10 @@ Rails.application.routes.draw do
 
   resource :publishes, only: %i[create]
   resource :public, path: "public/:slug/", only: %i[show] do
-   resources :attempts, only: %i[show create update new]
+    resources :attempts, only: %i[show create update new]
   end
+
+   resources :reports, only: %i[index]
   
   
   root "home#index"
