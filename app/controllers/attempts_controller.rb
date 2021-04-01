@@ -1,6 +1,6 @@
 class AttemptsController < ApplicationController
   before_action :find_quiz_with_slug, only: %i[new show update create]
-  before_action :load_questions_with_options, only: %i[show new]
+  before_action :load_questions_with_options, only: %i[show new update]
   before_action :load_attempt, only: %i[update show]
  
   def show
@@ -35,10 +35,13 @@ class AttemptsController < ApplicationController
 
   def update
     if @attempt.present?
-      @attempt.update(attempt_params)
-      @attempt.submitted = true
+        @attempt.update(attempt_params)
+        @attempt.submitted = true
+        counts = calculate_correct_answer
+        @attempt.correct_answers_count = counts[0]
+        @attempt.incorrect_answers_count = counts[1]
       if @attempt.save
-        render status: :ok, json: { notice: "Quiz submitted successfully"}
+        render status: :ok, json: { notice: "Quiz submitted successfully", attempt: @attempt}
       else
         render status: :unprocessable_entity, json: { error: @attempt.errors.full_messages.to_sentence }
       end
@@ -73,10 +76,22 @@ class AttemptsController < ApplicationController
       params.require(:attempt).permit(attempt_answers_attributes: [:value, :question_id, :attempt_id])
     end
 
-    def calculate_correct_answers
-      puts #{@attempt.attempt_answers}
-    end
+    def calculate_correct_answer
+      attempt_answers = @attempt.attempt_answers
+      questions = @quiz_questions
 
-    
+      obj = Hash.new()
+      attempt_answers.each{ |x| obj[x.question_id] = x.value }
+        result = questions.map do |q| 
+          { 
+            question_id: q[:question].id,
+            userOption: obj[q[:question].id],
+            correct_option: q[:options].select{ |option| option[:is_correct] }[0].value
+          }
+        end
+      correct_count = result.select{ |r| r[:userOption] == r[:correct_option] }
+      incorrect_count = result.select{ |r| r[:userOption] != r[:correct_option] }
+      return [correct_count.length, incorrect_count.length]
+    end
     
 end
