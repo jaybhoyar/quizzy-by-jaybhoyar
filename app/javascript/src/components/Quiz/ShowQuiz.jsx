@@ -73,7 +73,7 @@ const ShowQuiz = () => {
 				</div>
 			</div>
 			{quizDetails.slug ? (
-				<div className="py-3 px-4 text-xl flex items-center">
+				<div className="px-4 py-3 my-2 text-base flex items-center bg-white shadow">
 					Published, your public link is -
 					<p className="pl-3 text-quizzy-blue font-bold tracking-wide cursor-text">
 						{window.location.origin + "/public/" + quizDetails.slug}
@@ -83,34 +83,35 @@ const ShowQuiz = () => {
 				""
 			)}
 			<div className="mt-4">
-				{questions &&
+				{questions.length ? (
 					questions.map((obj, index) => {
 						return (
-							<div key={index} className="mt-4">
+							<div
+								key={index}
+								className="mt-5 p-4 border bg-white"
+							>
 								<div
 									keys={index}
-									className="p-3 flex justify-start items-center"
+									className="flex justify-between items-center pb-3 border-b"
 								>
-									<span className="pr-6">{`Question ${
-										index + 1
-									}`}</span>
 									<h2 className="text-xl">
+										<span className="pr-6 font-extrabold">{`Q ${
+											index + 1
+										}`}</span>
 										{obj.question.title}
 									</h2>
 									<div className="pl-6">
 										<Link
 											to={`/admin/quizzes/${id}/questions/${obj.question.id}/edit`}
-											className="p-2 mr-3 bg-yellow-500"
 										>
-											Edit
+											<i className="ri-pencil-fill text-quizzy-light-gray text-2xl mr-6"></i>
 										</Link>
 										<button
 											onClick={() =>
 												destroyQuestion(obj.question.id)
 											}
-											className="p-2 mr-3 bg-quizzy-error-red"
 										>
-											Delete
+											<i className="ri-delete-bin-6-fill text-quizzy-error-red text-2xl"></i>
 										</button>
 									</div>
 								</div>
@@ -118,16 +119,14 @@ const ShowQuiz = () => {
 									return (
 										<div
 											key={i}
-											className="p-3 flex justify-start items-center"
+											className="m-2 flex justify-start items-center text-quizzy-light-gray"
 										>
-											<span className="pr-6">{`Option ${
-												i + 1
-											}`}</span>
-											<h2 className="text-xl">
+											<i className="ri-checkbox-blank-circle-fill text-light-gray pr-4"></i>
+											<h2 className="text-base">
 												{option.value}
 											</h2>
 											{option.is_correct ? (
-												<span className="pl-5 text-quizzy-green">
+												<span className="pl-5  text-semibold text-quizzy-green">
 													Correct Answer
 												</span>
 											) : (
@@ -138,7 +137,14 @@ const ShowQuiz = () => {
 								})}
 							</div>
 						);
-					})}
+					})
+				) : (
+					<div className="flex justify-center mt-24">
+						<p className="py-12 font-bold text-3xl text-gray-400 tracking-wide">
+							Quiz has no questions
+						</p>
+					</div>
+				)}
 			</div>
 		</div>
 	);
