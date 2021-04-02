@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 
 import Table from "components/Quiz/Table";
 import AlertModal from "components/Common/AlertModal";
+import Loader from "components/Common/Loader";
+
 import quizzesApi from "apis/quiz";
 
 const ListQuizzes = () => {
 	const [quizzes, setQuizzes] = useState([]);
 	const [quiz, setQuiz] = useState();
 	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [loading, setLoading] = useState(Boolean);
 	const handleClose = () => setModalIsOpen(false);
 
 	function handleEvents(quiz) {
@@ -18,8 +21,10 @@ const ListQuizzes = () => {
 
 	const fetchQuizzes = async () => {
 		try {
+			setLoading(true);
 			const response = await quizzesApi.list();
 			setQuizzes(response.data.quizzes);
+			setLoading(false);
 		} catch (error) {
 			//
 		}
@@ -90,14 +95,20 @@ const ListQuizzes = () => {
 			) : (
 				""
 			)}
-			{quizzes.length ? (
-				<Table data={quizzes} columns={columns} />
+			{!loading ? (
+				<>
+					{quizzes.length ? (
+						<Table data={quizzes} columns={columns} />
+					) : (
+						<div className="flex justify-center mt-24">
+							<p className="py-12 font-bold text-3xl text-gray-400 tracking-wide">
+								You have not created any quiz.
+							</p>
+						</div>
+					)}
+				</>
 			) : (
-				<div className="flex justify-center mt-24">
-					<p className="py-12 font-bold text-3xl text-gray-400 tracking-wide">
-						You have not created any quiz.
-					</p>
-				</div>
+				<Loader />
 			)}
 		</>
 	);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import QuestionForm from "components/Question/Form/QuestionForm";
+import Loader from "components/Common/Loader";
 import questionApi from "apis/question";
 
 const UpdateQuestion = () => {
@@ -10,11 +11,14 @@ const UpdateQuestion = () => {
 	const [options, setOptions] = useState([]);
 	const [correctOption, setCorrectOption] = useState("");
 	const [removedOptions, setRemovedOptions] = useState([]);
+	const [loading, setLoading] = useState(Boolean);
 
 	const fetchQuestionDetails = async () => {
 		try {
+			setLoading(true);
 			const response = await questionApi.show(quiz_id, id);
 			setFormData(response);
+			setLoading(false);
 		} catch (error) {
 			//
 		}
@@ -78,16 +82,22 @@ const UpdateQuestion = () => {
 
 	return (
 		<div className="w-1/2 mx-auto p-5">
-			<h1 className="text-2xl font-bold mt-5">Update Question</h1>
-			<QuestionForm
-				title={title}
-				setTitle={setTitle}
-				options={options}
-				setOptions={setOptions}
-				correctOption={correctOption}
-				setCorrectOption={setCorrectOption}
-				handleSubmit={handleSubmit}
-			/>
+			{!loading ? (
+				<>
+					<h1 className="text-2xl font-bold mt-5">Update Question</h1>
+					<QuestionForm
+						title={title}
+						setTitle={setTitle}
+						options={options}
+						setOptions={setOptions}
+						correctOption={correctOption}
+						setCorrectOption={setCorrectOption}
+						handleSubmit={handleSubmit}
+					/>
+				</>
+			) : (
+				<Loader />
+			)}
 		</div>
 	);
 };
