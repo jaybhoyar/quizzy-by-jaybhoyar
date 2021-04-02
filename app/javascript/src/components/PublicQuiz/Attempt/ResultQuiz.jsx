@@ -42,21 +42,24 @@ const ResultQuiz = ({ public_slug, attemptId }) => {
 			{finalResult &&
 				finalResult.map((obj, index) => {
 					return (
-						<div key={index} className="mt-4 p-3 border bg-white">
-							<div className="flex justify-start items-center">
-								<span className="pr-6">{`Question ${
-									index + 1
-								}`}</span>
+						<div
+							key={index}
+							className="mt-5 p-4 border bg-white rounded-md"
+						>
+							<div className="flex justify-between items-center pb-3 border-b">
 								<h2 className="text-xl">
+									<span className="pr-6 font-extrabold">{`Q ${
+										index + 1
+									}`}</span>
 									{obj.question.title}
 								</h2>
 							</div>
-							<div className="pl-20">
+							<div className="pl-10">
 								{obj.options.map((option, i) => {
 									return (
 										<div
 											key={i}
-											className="p-3 flex justify-start items-center"
+											className="p-2 flex justify-start items-center"
 										>
 											<input
 												className="mr-16"

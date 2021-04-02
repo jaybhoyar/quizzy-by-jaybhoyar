@@ -90,10 +90,7 @@ const ShowQuiz = () => {
 								key={index}
 								className="mt-5 p-4 border bg-white"
 							>
-								<div
-									keys={index}
-									className="flex justify-between items-center pb-3 border-b"
-								>
+								<div className="flex justify-between items-center pb-3 border-b">
 									<h2 className="text-xl">
 										<span className="pr-6 font-extrabold">{`Q ${
 											index + 1

@@ -21,7 +21,7 @@ class AttemptsController < ApplicationController
     end
     attempt = @user.attempts.find_by(quiz_id: @quiz.id)
     if attempt.nil?
-      attempt = @user.attempts(quiz_id: @quiz.id)
+      attempt = @user.attempts.new(quiz_id: @quiz.id)
       attempt.save
     end
 
