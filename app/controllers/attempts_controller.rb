@@ -27,7 +27,7 @@ class AttemptsController < ApplicationController
 
     if @user.present? && attempt.present? 
       render status: :ok, json: { notice: "User created successfully!", attempt: attempt, 
-        user: @user.attributes.except("password_digest"), }
+        user: @user.attributes.except("password_digest")}
     else
       render status: :unprocessable_entity, json: { error: "Something Went Wrong" }
     end
@@ -51,7 +51,7 @@ class AttemptsController < ApplicationController
   private
 
     def find_quiz_with_slug
-      @quiz = Quiz.find_by(slug: params[:slug])
+      @quiz = Quiz.find_by(slug: params[:public_slug])
       rescue ActiveRecord::RecordNotFound => errors
       render json: {errors: errors}
     end

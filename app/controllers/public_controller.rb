@@ -1,4 +1,4 @@
-class PublicsController < ApplicationController
+class PublicController < ApplicationController
   before_action :find_quiz_with_slug, only: %i[show]
  
   def show

@@ -3,7 +3,7 @@ class User < ApplicationRecord
   enum role: [:standard, :administrator]
 
   has_many :quizzes
-  has_one  :attempt
+  has_many :attempts
   validates :email, presence: true,
                      format: { with: VALID_EMAIL_REGEX },
                      uniqueness: { case_sensitive: false }
