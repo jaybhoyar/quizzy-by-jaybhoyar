@@ -19,4 +19,13 @@ module Authenticator
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def get_attempts
+    @attempts = Attempt.all
+    @attempts.each do |attempt|
+      quiz = attempt.quiz
+      user = attempt.user
+    end
+    puts @attempts.to_a
+  end
 end

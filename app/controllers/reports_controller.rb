@@ -9,8 +9,8 @@ class ReportsController < ApplicationController
   end
 
   def create
-    # PrepareReportJob.perform_async("")
-    # generate_report
+    File.delete('public/attempts_report.xls') if File.exists?('public/attempts_report.xls')  
+    generate_report_file
   end
 
   private 
@@ -22,6 +22,8 @@ class ReportsController < ApplicationController
       user = User.find_by(id: user_id)
     end  
     
-    def generate_report
+    def generate_report_file
+      sleep 2
+      PrepareReportJob.perform_now
     end
 end
