@@ -15,6 +15,14 @@ const Reports = () => {
 		}
 	};
 
+	const handleGenerateReport = async () => {
+		try {
+			await reportsApi.create(attempts);
+		} catch (error) {
+			//
+		}
+	};
+
 	useEffect(() => {
 		fetchAttempts();
 	}, []);
@@ -54,6 +62,7 @@ const Reports = () => {
 						</div>
 						<div className="flex items-center justify-between">
 							<button
+								onClick={handleGenerateReport}
 								className="flex justify-center px-6 py-3
 									text-xl font-medium leading-5 text-white transition 
 									bg-quizzy-teal border border-transparent rounded-md"

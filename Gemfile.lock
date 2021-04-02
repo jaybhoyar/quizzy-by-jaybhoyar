@@ -163,6 +163,7 @@ GEM
       tilt
     redis (4.2.5)
     regexp_parser (2.1.1)
+    ruby-ole (1.2.12.2)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -182,6 +183,8 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    spreadsheet (1.2.8)
+      ruby-ole
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -235,6 +238,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq
+  spreadsheet
   spring
   sqlite3 (~> 1.4)
   tzinfo-data

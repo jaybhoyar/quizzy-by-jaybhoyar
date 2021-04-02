@@ -4,4 +4,7 @@ class PrepareReportJob < ApplicationJob
   def perform
     puts "Report is being prepared"
   end
+
+  private
+    
 end

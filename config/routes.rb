@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :attempts, only: %i[show create update new]
   end
 
-   resources :reports, only: %i[index]
+   resources :reports, only: %i[index create]
   
   
   root "home#index"
