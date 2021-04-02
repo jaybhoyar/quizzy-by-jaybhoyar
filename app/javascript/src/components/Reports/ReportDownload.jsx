@@ -3,7 +3,7 @@ import React from "react";
 const ReportDownload = () => {
 	return (
 		<div className="flex justify-center flex-col items-center mt-32">
-			<p className="py-12 font-bold text-3xl text-gray-400 tracking-wide">
+			<p className="py-12 font-bold text-3xl text-gray-800 tracking-wide">
 				Report is now ready for Download
 			</p>
 			<a

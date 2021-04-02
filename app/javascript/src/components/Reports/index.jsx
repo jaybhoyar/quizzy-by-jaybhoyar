@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 
 import reportsApi from "apis/report";
-import PageLoader from "components/PageLoader";
+import Loader from "components/Common/Loader";
 import Table from "components/Reports/Table";
 
 const Reports = () => {
 	const [attempts, setAttempts] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(Boolean);
 
 	const fetchAttempts = async () => {
 		try {
+			setLoading(true);
 			const response = await reportsApi.list();
 			setAttempts(response.data.attempts);
+			setLoading(false);
 		} catch (error) {
 			//
 		}
@@ -57,41 +59,41 @@ const Reports = () => {
 		},
 	];
 
-	if (loading) {
-		return (
-			<PageLoader message="Your Report is being prepared for downloding..." />
-		);
-	}
-
 	return (
 		<div>
-			{attempts.length ? (
-				<div className="py-4 w-3/4 mx-auto">
-					<div className="flex items-center justify-between h-16 mb-4 py-4 ">
-						<div className="flex items-center">
-							<h1 className="text-black font-bold text-2xl">
-								Reports
-							</h1>
-						</div>
-						<div className="flex items-center justify-between">
-							<button
-								onClick={handleGenerateReport}
-								className="flex justify-center px-6 py-3
+			{!loading ? (
+				<div>
+					{attempts.length ? (
+						<div className="py-4 w-3/4 mx-auto">
+							<div className="flex items-center justify-between h-16 mb-4 py-4 ">
+								<div className="flex items-center">
+									<h1 className="text-black font-bold text-2xl">
+										Reports
+									</h1>
+								</div>
+								<div className="flex items-center justify-between">
+									<button
+										onClick={handleGenerateReport}
+										className="flex justify-center px-6 py-3
 									text-xl font-medium leading-5 text-white transition 
 									bg-quizzy-teal border border-transparent rounded-md"
-							>
-								Download
-							</button>
+									>
+										Download
+									</button>
+								</div>
+							</div>
+							<Table data={attempts} columns={columns} />
 						</div>
-					</div>
-					<Table data={attempts} columns={columns} />
+					) : (
+						<div className="flex justify-center mt-24">
+							<p className="py-12 font-bold text-3xl text-gray-400 tracking-wide">
+								No Reports Founds.
+							</p>
+						</div>
+					)}
 				</div>
 			) : (
-				<div className="flex justify-center mt-24">
-					<p className="py-12 font-bold text-3xl text-gray-400 tracking-wide">
-						No Reports Founds.
-					</p>
-				</div>
+				<Loader />
 			)}
 		</div>
 	);
