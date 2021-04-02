@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import reportsApi from "apis/report";
+import ReportDownload from "components/Reports/ReportDownload";
 import Table from "components/Reports/Table";
 
 const Reports = () => {
 	const [attempts, setAttempts] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const fetchAttempts = async () => {
 		try {
@@ -17,7 +19,12 @@ const Reports = () => {
 
 	const handleGenerateReport = async () => {
 		try {
-			await reportsApi.create(attempts);
+			setLoading(true);
+			const res = await reportsApi.create(attempts);
+			if (res.data.success) {
+				setReportStatus(false);
+				window.location.href = "/admin/reports/download";
+			}
 		} catch (error) {
 			//
 		}
