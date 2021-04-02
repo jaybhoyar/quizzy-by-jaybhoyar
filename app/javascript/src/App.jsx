@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import NavBar from "components/NavBar";
 import Login from "components/Authentication/Login";
 import Reports from "components/Reports";
+import ReportDownload from "components/Reports/ReportDownload";
 import Dashboard from "components/Dashboard";
 import CreateQuiz from "components/Quiz/CreateQuiz";
 import ShowQuiz from "components/Quiz/ShowQuiz";
@@ -38,6 +39,11 @@ const App = ({ currentUser }) => {
 							exact
 							path="/admin/reports"
 							component={Reports}
+						/>
+						<Route
+							exact
+							path="/admin/reports/download"
+							component={ReportDownload}
 						/>
 						<Route
 							exact

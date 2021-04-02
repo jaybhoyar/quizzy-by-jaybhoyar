@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from "react";
 
 import reportsApi from "apis/report";
+import PageLoader from "components/PageLoader";
 import Table from "components/Reports/Table";
 
 const Reports = () => {
 	const [attempts, setAttempts] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const fetchAttempts = async () => {
 		try {
 			const response = await reportsApi.list();
 			setAttempts(response.data.attempts);
+		} catch (error) {
+			//
+		}
+	};
+
+	const handleGenerateReport = async () => {
+		try {
+			setLoading(true);
+			const res = await reportsApi.create(attempts);
+			if (res.status == 200) {
+				setLoading(false);
+				window.location.href = "/admin/reports/download";
+			}
 		} catch (error) {
 			//
 		}
@@ -42,6 +57,12 @@ const Reports = () => {
 		},
 	];
 
+	if (loading) {
+		return (
+			<PageLoader message="Your Report is being prepared for downloding..." />
+		);
+	}
+
 	return (
 		<div>
 			{attempts.length ? (
@@ -54,6 +75,7 @@ const Reports = () => {
 						</div>
 						<div className="flex items-center justify-between">
 							<button
+								onClick={handleGenerateReport}
 								className="flex justify-center px-6 py-3
 									text-xl font-medium leading-5 text-white transition 
 									bg-quizzy-teal border border-transparent rounded-md"

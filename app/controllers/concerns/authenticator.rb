@@ -19,4 +19,17 @@ module Authenticator
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def get_attempts
+    @attempts = Attempt.all
+    if @attempts.present?
+      @attempts.each do |attempt|
+        quiz = attempt.quiz
+        user = attempt.user
+      end
+    else
+     render status: :not_found, json: { notice: "No attempts yet" }
+    end
+  end
+
 end
