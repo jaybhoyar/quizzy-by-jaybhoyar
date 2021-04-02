@@ -1,15 +1,16 @@
 import axios from "axios";
 
-const showQuiz = (slug) => axios.get(`/public/${slug}/attempts/new`);
+const showQuiz = (public_slug) =>
+	axios.get(`/public/${public_slug}/attempts/new`);
 
-const showQuizWithAnswers = (slug, id) =>
-	axios.get(`/public/${slug}/attempts/${id}`);
+const showQuizWithAnswers = (public_slug, id) =>
+	axios.get(`/public/${public_slug}/attempts/${id}`);
 
-const create = ({ slug, payload }) =>
-	axios.post(`/public/${slug}/attempts`, payload);
+const create = ({ public_slug, payload }) =>
+	axios.post(`/public/${public_slug}/attempts`, payload);
 
-const update = ({ slug, id, payload }) =>
-	axios.put(`/public/${slug}/attempts/${id}`, payload);
+const update = ({ public_slug, id, payload }) =>
+	axios.put(`/public/${public_slug}/attempts/${id}`, payload);
 
 const attemptApi = {
 	showQuiz,

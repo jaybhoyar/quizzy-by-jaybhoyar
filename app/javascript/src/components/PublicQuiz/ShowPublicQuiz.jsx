@@ -7,7 +7,7 @@ import AttemptQuiz from "components/PublicQuiz/Attempt/AttemptQuiz";
 import ResultQuiz from "components/PublicQuiz/Attempt/ResultQuiz";
 
 const ShowPublicQuiz = () => {
-	const { slug } = useParams();
+	const { public_slug } = useParams();
 	const [quizDetails, setQuizDetails] = useState("");
 	const [questions, setQuestions] = useState([]);
 	const [participant, setParticipant] = useState("");
@@ -17,7 +17,7 @@ const ShowPublicQuiz = () => {
 
 	const fetchQuizDetails = async () => {
 		try {
-			const response = await attemptApi.showQuiz(slug);
+			const response = await attemptApi.showQuiz(public_slug);
 			setQuizDetails(response.data.quiz);
 			setQuestions(response.data.questions);
 		} catch (error) {
@@ -29,7 +29,7 @@ const ShowPublicQuiz = () => {
 		event.preventDefault();
 		try {
 			await attemptApi.update({
-				slug,
+				public_slug,
 				id: attempt.id,
 				payload: {
 					attempt_answers_attributes: answers,
@@ -92,7 +92,7 @@ const ShowPublicQuiz = () => {
 						case "QUIZRESULT":
 							return (
 								<ResultQuiz
-									slug={slug}
+									public_slug={public_slug}
 									attemptId={attempt.id}
 								/>
 							);

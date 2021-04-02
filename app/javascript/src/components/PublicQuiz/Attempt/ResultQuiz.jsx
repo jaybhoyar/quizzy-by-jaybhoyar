@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import attemptApi from "apis/attempt";
 
-const ResultQuiz = ({ slug, attemptId }) => {
+const ResultQuiz = ({ public_slug, attemptId }) => {
 	const [finalResult, setFinalResult] = useState([]);
 	const [quiz, setQuiz] = useState("");
 
@@ -22,7 +22,10 @@ const ResultQuiz = ({ slug, attemptId }) => {
 
 	const getQuizWithAnswers = async () => {
 		try {
-			const res = await attemptApi.showQuizWithAnswers(slug, attemptId);
+			const res = await attemptApi.showQuizWithAnswers(
+				public_slug,
+				attemptId
+			);
 			buildFinalResult(res.data.attempted_answers, res.data.questions);
 			setQuiz(res.data.quiz);
 		} catch (error) {

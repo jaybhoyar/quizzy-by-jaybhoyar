@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   resource :publishes, only: %i[create]
-  resource :public, path: "public/:slug/", only: %i[show] do
+  resources :public, param: :slug, only: %i[show] do
     resources :attempts, only: %i[show create update new]
   end
 
