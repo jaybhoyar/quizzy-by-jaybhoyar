@@ -10,6 +10,7 @@ class ReportsController < ApplicationController
   def create
     File.delete('public/attempts_report.xls') if File.exists?('public/attempts_report.xls')  
     generate_report_file
+
   end
 
   def new
@@ -33,5 +34,6 @@ class ReportsController < ApplicationController
     def generate_report_file
       sleep 10
       PrepareReportJob.perform_now
+      render status: :ok, json: { notice: "Report created successfully" }
     end
 end

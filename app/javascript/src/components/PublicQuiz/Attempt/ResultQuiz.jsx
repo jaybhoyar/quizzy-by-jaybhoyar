@@ -36,7 +36,6 @@ const ResultQuiz = ({ slug, attemptId }) => {
 
 	return (
 		<div className="py-10 w-full mx-auto">
-			{console.log(finalResult)}
 			{finalResult &&
 				finalResult.map((obj, index) => {
 					return (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import reportsApi from "apis/report";
+import PageLoader from "components/PageLoader";
 import Table from "components/Reports/Table";
 
 const Reports = () => {
@@ -20,8 +21,8 @@ const Reports = () => {
 		try {
 			setLoading(true);
 			const res = await reportsApi.create(attempts);
-			if (res.data.success) {
-				setReportStatus(false);
+			if (res.status == 200) {
+				setLoading(false);
 				window.location.href = "/admin/reports/download";
 			}
 		} catch (error) {
@@ -55,6 +56,12 @@ const Reports = () => {
 			accessor: "attempt.incorrect_answers_count",
 		},
 	];
+
+	if (loading) {
+		return (
+			<PageLoader message="Your Report is being prepared for downloding..." />
+		);
+	}
 
 	return (
 		<div>

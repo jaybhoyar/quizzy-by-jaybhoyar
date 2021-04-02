@@ -22,10 +22,14 @@ module Authenticator
 
   def get_attempts
     @attempts = Attempt.all
-    @attempts.each do |attempt|
-      quiz = attempt.quiz
-      user = attempt.user
+    if @attempts.present?
+      @attempts.each do |attempt|
+        quiz = attempt.quiz
+        user = attempt.user
+      end
+    else
+     render status: :not_found, json: { notice: "No attempts yet" }
     end
-    puts @attempts.to_a
   end
+
 end
