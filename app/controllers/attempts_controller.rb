@@ -19,9 +19,9 @@ class AttemptsController < ApplicationController
       @user.password = @user.password_confirmation = "defaultpassword"
       @user.save
     end
-    attempt = Attempt.find_by(quiz_id: @quiz.id, user_id: @user.id)
+    attempt = @user.attempts.find_by(quiz_id: @quiz.id)
     if attempt.nil?
-      attempt = Attempt.new(quiz_id: @quiz.id, user_id: @user.id)
+      attempt = @user.attempts(quiz_id: @quiz.id)
       attempt.save
     end
 

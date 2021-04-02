@@ -26,10 +26,6 @@ class QuestionsController < ApplicationController
 
   def destroy
     if @question.destroy
-      if @quiz_questions.empty?
-        @quiz.slug = nil
-        @quiz.save
-      end
       render status: :ok, json: { notice: "Question deleted successfully!" }
     else
       render status: :unprocessable_entity, json: { error: @question.errors.full_messages.to_sentence }
