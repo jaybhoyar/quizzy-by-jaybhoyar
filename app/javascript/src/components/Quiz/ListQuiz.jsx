@@ -47,7 +47,7 @@ const ListQuizzes = () => {
 			Cell: ({ row }) => (
 				<Link
 					to={`/admin/quizzes/${row.original.id}/show`}
-					className="cursor-pointer"
+					className="cursor-pointer pr-8 pl-6"
 				>
 					{row.original.name}
 				</Link>

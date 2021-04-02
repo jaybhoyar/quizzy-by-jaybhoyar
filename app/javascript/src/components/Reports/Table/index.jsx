@@ -11,13 +11,13 @@ const Table = ({ data, columns }) => {
 	} = useTable({ data, columns });
 	return (
 		<div className="mt-6 w-full">
-			<table {...getTableProps()} className="w-full">
+			<table {...getTableProps()} className="w-full shadow">
 				<thead>
 					{headerGroups.map((headerGroup, index) => (
 						<tr
 							key={index}
 							{...headerGroup.getHeaderGroupProps()}
-							className="bg-quizzy-navy-blue"
+							className="bg-quizzy-light-gray"
 						>
 							{headerGroup.headers.map((column, index) => (
 								<th

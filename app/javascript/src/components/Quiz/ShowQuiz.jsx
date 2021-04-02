@@ -75,7 +75,7 @@ const ShowQuiz = () => {
 			{quizDetails.slug ? (
 				<div className="py-3 px-4 text-xl flex items-center">
 					Published, your public link is -
-					<p className="pl-3 text-quizzy-blue font-bold tracking-wide cursor-pointer">
+					<p className="pl-3 text-quizzy-blue font-bold tracking-wide cursor-text">
 						{window.location.origin + "/public/" + quizDetails.slug}
 					</p>
 				</div>

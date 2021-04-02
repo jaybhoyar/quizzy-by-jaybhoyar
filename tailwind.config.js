@@ -8,10 +8,11 @@ module.exports = {
 		extend: {
 			colors: {
 				"quizzy-teal": "#088e99",
-				"quizzy-bg": "#f5f5f5",
+				"quizzy-bg": "#F3F7F7",
 				"quizzy-green": "#1ba94c",
 				"quizzy-blue": "#3a8ff2",
 				"quizzy-navy-blue": "#39424e",
+				"quizzy-light-gray": "#4d5157",
 				"quizzy-light-orange": "#f29266",
 				"quizzy-error-red": "#fc1f0f",
 				"quizzy-error-bg": "#f8d7da",

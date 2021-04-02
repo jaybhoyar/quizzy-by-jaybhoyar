@@ -40,8 +40,8 @@ const EditTask = ({ history }) => {
 	}, []);
 
 	return (
-		<div className="w-2/6 mx-auto p-5">
-			<h1 className="text-4xl font-bold mx-auto my-8">Edit Quiz</h1>
+		<div className="w-2/6 mx-auto p-8 mt-8 ">
+			<h1 className="text-4xl font-bold mx-auto my-4 text-center">Edit Quiz</h1>
 			<QuizForm
 				name={name}
 				setName={setName}

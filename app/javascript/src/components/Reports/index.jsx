@@ -67,7 +67,7 @@ const Reports = () => {
 		<div>
 			{attempts.length ? (
 				<div className="py-4 w-3/4 mx-auto">
-					<div className="flex items-center justify-between h-16 mb-4">
+					<div className="flex items-center justify-between h-16 mb-4 py-4 ">
 						<div className="flex items-center">
 							<h1 className="text-black font-bold text-2xl">
 								Reports
