@@ -12,6 +12,7 @@ class PrepareReportJob < ApplicationJob
         attempt.correct_answers_count, attempt.incorrect_answers_count)
     end
     book.write 'public/attempts_report.xls'
+    render status: :ok
   end
     
 end

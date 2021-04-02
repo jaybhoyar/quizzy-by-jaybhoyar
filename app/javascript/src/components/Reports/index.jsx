@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import reportsApi from "apis/report";
-import ReportDownload from "components/Reports/ReportDownload";
 import Table from "components/Reports/Table";
 
 const Reports = () => {
