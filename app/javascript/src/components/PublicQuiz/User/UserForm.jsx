@@ -5,7 +5,7 @@ import Button from "components/Button";
 
 const UserForm = ({ setFirstName, setLastName, setEmail, handleSubmit }) => {
 	return (
-		<div className="w-full max-w-md">
+		<div className="w-3/4 mx-auto">
 			<form className="mt-8" onSubmit={handleSubmit}>
 				<Input
 					label="First Name"

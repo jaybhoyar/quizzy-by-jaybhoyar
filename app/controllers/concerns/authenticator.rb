@@ -21,12 +21,13 @@ module Authenticator
   end
 
   def get_attempts
-    @attempts = Attempt.all
+    @attempts = Attempt.where(submitted: true).to_a
     if @attempts.present?
       @attempts.each do |attempt|
         quiz = attempt.quiz
         user = attempt.user
       end
+      
     else
      render status: :not_found, json: { notice: "No attempts yet" }
     end

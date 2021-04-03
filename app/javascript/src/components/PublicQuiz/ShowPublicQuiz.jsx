@@ -63,7 +63,7 @@ const ShowPublicQuiz = () => {
 			<div className="w-3/6 p-5">
 				{quizDetails && (
 					<h2
-						className="mt-6 text-4xl font-extrabold leading-9
+						className="mt-6 text-3xl font-extrabold leading-9
          text-center text-bb-gray-700"
 					>
 						{`Welcome to ${quizDetails.name} Quiz`}

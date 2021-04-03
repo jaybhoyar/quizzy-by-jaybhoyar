@@ -1,10 +1,14 @@
 class ReportsController < ApplicationController
 
   def index
-    attempts = Attempt.all
-    @attempts_with_user_and_quiz = attempts.map { | attempt |  { attempt: attempt, user: load_user(attempt[:user_id]), 
-      quiz: load_quiz(attempt[:quiz_id]) } }
-    render status: :ok, json: { attempts: @attempts_with_user_and_quiz  }
+    attempts = Attempt.where(submitted: true).to_a
+    if attempts.present?
+      @attempts_with_user_and_quiz = attempts.map { | attempt |  { attempt: attempt, user: load_user(attempt[:user_id]), 
+        quiz: load_quiz(attempt[:quiz_id]) } }
+      render status: :ok, json: { attempts: @attempts_with_user_and_quiz }
+    else
+      render status: :not_found, json: { error: "No Attempts yet"}
+    end
   end
 
   def create

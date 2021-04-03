@@ -21,7 +21,7 @@ class AttemptsController < ApplicationController
     end
     attempt = @user.attempts.find_by(quiz_id: @quiz.id)
     if attempt.nil?
-      attempt = @user.attempts(quiz_id: @quiz.id)
+      attempt = @user.attempts.new(quiz_id: @quiz.id)
       attempt.save
     end
 
@@ -36,10 +36,10 @@ class AttemptsController < ApplicationController
   def update
     if @attempt.present?
         @attempt.update(attempt_params)
-        @attempt.submitted = true
         counts = calculate_correct_answer
         @attempt.correct_answers_count = counts[0]
         @attempt.incorrect_answers_count = counts[1]
+        @attempt.submitted = true
       if @attempt.save
         render status: :ok, json: { notice: "Quiz submitted successfully", attempt: @attempt}
       else
